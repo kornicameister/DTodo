@@ -1,0 +1,33 @@
+{% load i18n staticfiles %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"pl" }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+          lang="{{ LANGUAGE_CODE|default:"pl" }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="kornicameister@gmail.com"/>
+    {% block blockbots %}
+        <meta name="robots" content="noindex, nofollow"/>
+    {% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block extrahead %}{% endblock %}
+</head>
+<body class="dt-body">
+{% include 'base/components/header.html' %}
+{% include 'base/components/navigation.html' %}
+<div class="col-sm-10 container-fluid clearfix">
+    {% block crumbs %}
+    {% endblock %}
+    <div class="slide center-block col-sm-12">
+        <div class="sg-content well well-sm">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% include 'base/components/footer.html' %}
+</body>
+</html>

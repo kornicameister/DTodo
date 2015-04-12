@@ -1,0 +1,16 @@
+<nav class="navbar navbar-left col-sm-2 navbar-nav"
+     role="navigation">
+    {#todo add condition to show button only if required#}
+    <div class="container-fluid">
+        <button type="button" class="btn btn-info btn-block"
+                {# todo add handler here#}
+                ng-click="vm.backToPreviousState($event)">
+            <i class="glyphicon glyphicon-backward"></i>
+        </button>
+    </div>
+    <div class="container-fluid">
+        <ul class="nav nav-pills nav-stacked">
+            {# todo add logic here #}
+        </ul>
+    </div>
+</nav>
