@@ -1,16 +1,23 @@
-<nav class="navbar navbar-left col-sm-2 navbar-nav"
-     role="navigation">
-    {#todo add condition to show button only if required#}
-    <div class="container-fluid">
-        <button type="button" class="btn btn-info btn-block"
-                {# todo add handler here#}
-                ng-click="vm.backToPreviousState($event)">
-            <i class="glyphicon glyphicon-backward"></i>
-        </button>
-    </div>
-    <div class="container-fluid">
-        <ul class="nav nav-pills nav-stacked">
-            {# todo add logic here #}
+{% load i18n %}
+<nav class="navbar-default sidebar col-md-3" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control"
+                           placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </li>
+            <li>{# add active class handling here, based on fiven view #}
+                <a href="{% url 'dtodo:index' %}">
+                    <i class="fa fa-home fa-spin"></i>{% trans 'Index' %}
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

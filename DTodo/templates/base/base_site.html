@@ -1,33 +1,53 @@
-{% load i18n staticfiles %}
+{% load i18n dtodo_tags django_bootstrap_breadcrumbs %}
 {% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"pl" }}">
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
-          lang="{{ LANGUAGE_CODE|default:"pl" }}"/>
+          lang="{{ LANGUAGE_CODE|default:"en-us" }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="kornicameister@gmail.com"/>
     {% block blockbots %}
         <meta name="robots" content="noindex, nofollow"/>
     {% endblock %}
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{{ title|default:"DTodo" }}</title>
 
-    {% block extrahead %}{% endblock %}
+    {# include css/js files #}
+    {% include 'base/head/css.html' %}
+    {% include 'base/head/dtodo_css.html' %}
+    {% include 'base/head/js.html' %}
+
+    {# allow to include custom css/js per site #}
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock %}
+
 </head>
 <body class="dt-body">
-{% include 'base/components/header.html' %}
-{% include 'base/components/navigation.html' %}
-<div class="col-sm-10 container-fluid clearfix">
-    {% block crumbs %}
-    {% endblock %}
-    <div class="slide center-block col-sm-12">
-        <div class="sg-content well well-sm">
-            {% block content %}
-            {% endblock %}
+<div class="dtodo-body-content">
+    {% include 'base/components/header.html' %}
+    {% include 'base/components/navigation.html' %}
+    <div class="col-md-9 row">
+
+        <div class="container-fluid">
+            <div class="vcenter dtodo-breadcrumbs">
+                    {% block breadcrumbs %}
+                        {% clear_breadcrumbs %}
+                        {% breadcrumb_safe "<i class='fa fa-home'></i>" "" %}
+                    {% endblock %}
+                    {% render_breadcrumbs %}
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="sg-content well well-sm">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
+    {% include 'base/components/footer.html' %}
 </div>
-{% include 'base/components/footer.html' %}
 </body>
 </html>

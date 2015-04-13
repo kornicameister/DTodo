@@ -1,10 +1,10 @@
 {% extends 'base/base_site.html' %}
 
-{% block title %}
-    DTodo
-{% endblock %}
+{% load i18n django_bootstrap_breadcrumbs %}
 
-{% block crumbs %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "DTodo" "dtodo:index" %}
 {% endblock %}
 
 {% block content %}

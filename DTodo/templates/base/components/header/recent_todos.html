@@ -1,0 +1,29 @@
+{# will be populated with recent todos #}
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-todos">
+        <li>
+            <a href="#todo-url">
+                <div>
+                    <strong>Todo title</strong>
+            <span class="pull-right text-muted">
+                <em>todo-updated-at-date</em>
+            </span>
+                </div>
+                <div>
+                    truncated todo description
+                </div>
+            </a>
+        </li>
+        {# divider if not last todoitem #}
+        <li class="divider"></li>
+        <li>
+            <a class="text-center" href="#">
+                <strong>See All Tasks</strong>
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</li>

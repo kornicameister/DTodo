@@ -1,0 +1,24 @@
+{% load dtodo_tags %}
+<nav class="navbar navbar-default navbar-static-top" role="navigation"
+     style="margin-bottom: 0">
+
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand">
+            DTodo 1.0 / <span class="text-primary text-nowrap">{% pageHeader title default="DTodo" %}</span>
+        </span>
+    </div>
+
+    <ul class="nav navbar-top-links navbar-right">
+        {% include 'base/components/header/recent_todos.html' %}
+        {% include 'base/components/header/most_completed_todos.html' %}
+        {% include 'base/components/header/user.html' %}
+    </ul>
+
+</nav>

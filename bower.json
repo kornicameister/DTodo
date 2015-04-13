@@ -1,0 +1,22 @@
+{
+  "name"           : "DTodo",
+  "version"        : "0.0.1",
+  "homepage"       : "https://github.com/kornicameister/DTodo",
+  "repository"     : {
+    "type": "git",
+    "url" : "git://github.com/kornicameister/DTodo.git"
+  },
+  "authors"        : [
+    "kornicameister@gmail.com"
+  ],
+  "license"        : "GPLv3",
+  "private"        : true,
+  "dependencies"   : {
+    "lodash"                       : "3.3.0",
+    "animate.css"                  : "3.2.x",
+    "normalize-css"                : "3.0.x",
+    "bootstrap"                    : "3.3.x",
+    "jquery"                       : "latest",
+    "font-awesome"                 : "~4.3.0"
+  }
+}

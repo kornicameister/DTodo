@@ -60,3 +60,5 @@ target/
 *.iml
 .idea/.name
 dtodo.db
+
+static/assets/

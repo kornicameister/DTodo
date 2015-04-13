@@ -1,0 +1,2 @@
+django>=1.8
+django-bootstrap-breadcrumbs>=0.7.0
