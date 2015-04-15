@@ -7,3 +7,5 @@ class DTodoAppConfig(AppConfig):
     verbose_name = 'Django Todo'
 
     def ready(self):
+        # noinspection PyUnresolvedReferences
+        import DTodo.listeners
