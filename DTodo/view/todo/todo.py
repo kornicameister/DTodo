@@ -1,10 +1,10 @@
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, CreateView, UpdateView, \
-    DeleteView, FormView
+    DeleteView
 from sortable_listview import SortableListView
-from DTodo.forms.forms import TodoForm
 
+from DTodo.forms.forms import TodoForm
 from DTodo.models import Todo
 from DTodo.contants import PAGING_OPTS
 
@@ -62,7 +62,7 @@ class TodoDetailView(DetailView):
     template_name = 'todo/todo-detail-view.html'
 
 
-class TodoCreateView(FormView):
+class TodoCreateView(CreateView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-create-view.html'

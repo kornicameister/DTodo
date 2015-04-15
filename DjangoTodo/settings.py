@@ -57,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django_tools.middlewares.ThreadLocal.ThreadLocalMiddleware'
 )
 
 ROOT_URLCONF = 'DjangoTodo.urls'

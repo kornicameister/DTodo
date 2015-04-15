@@ -52,13 +52,15 @@ class TodoList(AuditableModel):
     Wraps several todos in the single list. Note that this is different
     level of aggregation, other then Tag.
     """
-    name = models.CharField(max_length=15, null=False, unique=False,
-                            help_text=_('Title of Todo list'))
+    name = models.CharField(max_length=15,
+                            null=False,
+                            unique=False)
     """
     TodoList has a name, this name is considered unique within given user
     namespace of all todos
     """
-    visibility = models.CharField(max_length=4, choices=VISIBILITY,
+    visibility = models.CharField(max_length=4,
+                                  choices=VISIBILITY,
                                   default=PRIVATE_VISIBILITY)
     """
     Visibility markdown a list as public, private or shared.
@@ -70,7 +72,8 @@ class TodoList(AuditableModel):
     - 1 shared
     - unlimited public
     """
-    owned_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    owned_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 related_name='+')
     """
     Marks down a user that created a todo and is an owner of such todo.
     Note that some properties of todo list are unique in the namespace
@@ -92,16 +95,22 @@ class Todo(AuditableModel):
     )
     # visibility
     # fields
-    name = models.CharField(max_length=15, null=False, unique=False)
-    completed = models.BooleanField(null=False, default=False)
-    visibility = models.CharField(max_length=4, choices=VISIBILITY,
+    name = models.CharField(max_length=15,
+                            null=False,
+                            unique=False)
+    completed = models.BooleanField(null=False,
+                                    default=False)
+    visibility = models.CharField(max_length=4,
+                                  choices=VISIBILITY,
                                   default=PRIVATE_VISIBILITY)
     tags = models.ManyToManyField(Tag, related_name='todo_tags')
     """
     Multiple tags can be associated with a Todo
     """
-    list = models.OneToOneField(TodoList, related_name='todo_list', null=True,
-                                unique=False)
+    list = models.ForeignKey(TodoList,
+                             related_name='todo_list',
+                             null=True,
+                             unique=False)
     """
     Todo belong only to single list
     """

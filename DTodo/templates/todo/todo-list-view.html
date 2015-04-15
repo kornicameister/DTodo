@@ -7,6 +7,11 @@
     {% breadcrumb "Todos" "dtodo:todo:all" %}
 {% endblock %}
 
+
+{% block title %}
+    {% trans 'model.Todo.allTodos' %}
+{% endblock %}
+
 {% block action-buttons %}
     <button type="submit" class="navbar-btn btn btn-primary">
         {% trans 'btn.selectAll' %}
@@ -42,7 +47,7 @@
             {% for todo in object_list %}
                 <li class="list-group-item {% todo_contextual_class_visibility todo.visibility %}">
                     <h4 class="list-group-item-heading">
-                        <a href="{% url 'dtodo:todo:view' id=todo.id %}">{{ todo.name }}</a>
+                        <a href="{% url 'dtodo:todo:view' pk=todo.id %}">{{ todo.name }}</a>
                         <span class="badge">{{ todo.item_count }}</span>
                     </h4>
 

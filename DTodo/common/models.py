@@ -1,4 +1,3 @@
-import datetime
 from django.conf import settings
 from django.db import models
 
@@ -9,6 +8,8 @@ class AuditableModel(models.Model):
     to provide custom fields such as
       - created_by / updated_by defining a user who made an update
       - created_at / updated_at defining a datetime when it happened
+
+    Those fields are being set in appropriate handlers for 'pre_save' signal
     """
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    related_name="%(app_label)s_"
@@ -18,15 +19,6 @@ class AuditableModel(models.Model):
                                    related_name="%(app_label)s_"
                                                 "%(class)s_updated_by+")
     updated_at = models.DateTimeField()
-
-    # opposite is to create own fields and overwrite pre_save
-    def save(self, *args, **kwargs):
-        """ On save, update timestamps """
-        today = datetime.datetime.today()
-        if not self.id:
-            self.created = today
-        self.modified = today
-        return super(AuditableModel, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True

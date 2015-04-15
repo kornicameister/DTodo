@@ -25,23 +25,18 @@
 
 </head>
 <body class="dt-body">
-<div class="dtodo-body-content">
+<div class="dt-body-content">
     {% include 'base/components/header.html' %}
     {% include 'base/components/navigation.html' %}
-    <div class="col-md-9 row">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <div class="container">
+            {% block breadcrumbs %}
+                {% clear_breadcrumbs %}
+                {% breadcrumb_safe "<i class='fa fa-home'></i>" "" %}
+            {% endblock %}
+            {% render_breadcrumbs %}
 
-        <div class="container-fluid">
-            <div class="vcenter dtodo-breadcrumbs">
-                    {% block breadcrumbs %}
-                        {% clear_breadcrumbs %}
-                        {% breadcrumb_safe "<i class='fa fa-home'></i>" "" %}
-                    {% endblock %}
-                    {% render_breadcrumbs %}
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="sg-content well well-sm">
+            <div class="dt-content well">
                 {% block content %}
                 {% endblock %}
             </div>

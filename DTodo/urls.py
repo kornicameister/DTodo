@@ -8,7 +8,8 @@ urlpatterns = [
     url(regex=r'^$',
         view=never_cache(views.index_view),
         name='index'),
-    url(r'^todo', include('DTodo.view.todo.urls', namespace='todo'))
+    url(r'^todo', include('DTodo.view.todo.urls', namespace='todo')),
+    url(r'^tag', include('DTodo.view.tag.urls', namespace='tag')),
 ]
 
 # urlpatterns += [
