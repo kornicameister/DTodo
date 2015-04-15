@@ -1,0 +1,81 @@
+{% extends 'base/base-list-view.html' %}
+{% load i18n django_bootstrap_breadcrumbs dtodo_tags %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "DTodo" "dtodo:index" %}
+    {% breadcrumb "Todos" "dtodo:todo:all" %}
+{% endblock %}
+
+{% block action-buttons %}
+    <button type="submit" class="navbar-btn btn btn-primary">
+        {% trans 'btn.selectAll' %}
+    </button>
+    <a href="{% url 'dtodo:todo:create' %}" class="navbar-btn btn btn-primary">
+        {% trans 'btn.add' %}
+    </a>
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#"
+               class="dropdown-toggle"
+               data-toggle="dropdown"
+               role="button"
+               aria-expanded="false">
+                {% trans 'FILTER_BY' %}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                {% for value,label in filter_by %}
+                    <li>
+                        <a href="{% url 'dtodo:todo:all' %}?filterBy={% trans value %}">{{ label }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block table-content %}
+    {% if object_list %}
+        {% include 'sortable_listview/sort_links.html' %}
+        <ul class="list-group">
+            {% for todo in object_list %}
+                <li class="list-group-item {% todo_contextual_class_visibility todo.visibility %}">
+                    <h4 class="list-group-item-heading">
+                        <a href="{% url 'dtodo:todo:view' id=todo.id %}">{{ todo.name }}</a>
+                        <span class="badge">{{ todo.item_count }}</span>
+                    </h4>
+
+                    <div class="list-group-item-text">
+                        <div class="center-block">
+                            {% if todo.tags %}
+                                <ul id="tag-cloud">
+                                    {% for tag in todo.tags.all %}
+                                        <li class="tag-cloud tag-cloud-info">
+                                            {{ tag.word }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {% if todo.progress %}
+                                <div class="progress">
+                                    <div class="progress-bar"
+                                         role="progressbar"
+                                         aria-valuenow="{% percent_value todo.progress %}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         style="width: {% percent_value todo.progress %}%;">
+                                        {% percent_value todo.progress %}%
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% include 'sortable_listview/pagination.html' %}
+    {% else %}
+        {% trans 'NO_TODO_TO_DISPLAY' %}
+    {% endif %}
+{% endblock %}

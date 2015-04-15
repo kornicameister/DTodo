@@ -1,0 +1,49 @@
+#: .\DTodo\models.py:42 .\DTodo\models.py:82
+msgid "visibility.public"
+msgstr "Public"
+
+#: .\DTodo\models.py:43 .\DTodo\models.py:83
+msgid "visibility.private"
+msgstr "Private"
+
+#: .\DTodo\models.py:44
+msgid "visibility.shared"
+msgstr "Shared"
+
+#: .\DTodo\models.py:51
+msgid "Title of Todo list"
+msgstr ""
+
+#: .\DTodo\models.py:171
+msgid "error.todo_item_no_todo_association"
+msgstr "TodoItem should be associated with Todo"
+
+#: .\DTodo\templates\base\components\navigation.html:8
+msgid "Index"
+msgstr ""
+
+#: .\DTodo\templates\base\components\navigation.html:13
+msgid "Todo"
+msgstr ""
+
+#: .\DTodo\templates\todo\todo-list-view.html:13
+msgid "Select All"
+msgstr ""
+
+#: .\DTodo\templates\todo\todo-list-view.html:22
+msgid "FILTER_BY"
+msgstr "Filter by"
+
+#: .\DTodo\templates\todo\todo-list-view.html:45
+msgid "NO_TODO_TO_DISPLAY"
+msgstr "There is currently no todo to display"
+
+#: .\templates\admin\base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+msgid "btn.selectAll"
+msgstr "Select All"
+
+#~ msgid "todo.name.help_text"
+#~ msgstr "Title of single Todo"

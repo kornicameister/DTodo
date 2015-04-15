@@ -1,2 +1,5 @@
 django>=1.8
 django-bootstrap-breadcrumbs>=0.7.0
+django-sortable-listview>=0.41
+django-bootstrap3>=5.3.1
+django-filter

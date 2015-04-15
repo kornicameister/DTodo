@@ -1,0 +1,9 @@
+{% extends 'base/base_site.html' %}
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "DTodo" "dtodo:index" %}
+    {% breadcrumb "Todos" "dtodo:todo:all" %}
+    {% breadcrumb "Edit" "dtodo:todo:edit" %}
+{% endblock %}

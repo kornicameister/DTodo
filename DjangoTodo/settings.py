@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from django.utils.translation import ugettext, ugettext_lazy
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -38,13 +41,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap_breadcrumbs',
+    'sortable_listview',
+    'bootstrap3',
+    'django_filters',
     'DTodo',  # core application
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -65,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.core.context_processors.i18n",
             ],
         },
     },
@@ -85,13 +93,17 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    (LANGUAGE_CODE, 'English'),
+)
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -118,3 +130,15 @@ CACHES = {
 }
 
 BREADCRUMBS_TEMPLATE = 'django_bootstrap_breadcrumbs/bootstrap3.html'
+_STATIC_ASSETS = STATIC_URL + 'assets/'
+_BOOTSTRAP_DIR = 'bootstrap/dist/'
+BOOTSTRAP3 = {
+    'jquery_url': '%sjquery/dist/jquery.min.js' % _STATIC_ASSETS,
+    'css_url': '%s%scss/bootstrap.min.css' % (
+        _STATIC_ASSETS, _BOOTSTRAP_DIR),
+    'theme_url': '%s%scss/bootstrap-theme.min.css' % (
+        _STATIC_ASSETS, _BOOTSTRAP_DIR),
+    'javascript_url': '%s%sjs/bootstrap.min.js' % (
+        _STATIC_ASSETS, _BOOTSTRAP_DIR),
+    'include_jquery': True
+}

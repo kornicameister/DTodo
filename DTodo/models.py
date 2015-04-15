@@ -2,7 +2,9 @@ from django.conf import settings
 from django.db import models
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
+
 from DTodo.common.models import AuditableModel
+
 
 '''
 
@@ -39,9 +41,9 @@ class TodoList(AuditableModel):
     PRIVATE_VISIBILITY = 'PRIV'
     SHARED_VISIBILITY = 'SHRD'
     VISIBILITY = (
-        (PUBLIC_VISIBILITY, _('Public')),
-        (PRIVATE_VISIBILITY, _('Private')),
-        (SHARED_VISIBILITY, _('Shared'))
+        (PUBLIC_VISIBILITY, _('visibility.public')),
+        (PRIVATE_VISIBILITY, _('visibility.private')),
+        (SHARED_VISIBILITY, _('visibility.shared'))
     )
     """
     Wraps several todos in the single list. Note that this is different
@@ -79,24 +81,20 @@ class Todo(AuditableModel):
     PUBLIC_VISIBILITY = 'PUB'
     PRIVATE_VISIBILITY = 'PRIV'
     VISIBILITY = (
-        (PUBLIC_VISIBILITY, _('Public')),
-        (PRIVATE_VISIBILITY, _('Private'))
+        (PUBLIC_VISIBILITY, _('visibility.public')),
+        (PRIVATE_VISIBILITY, _('visibility.private'))
     )
     # visibility
     # fields
-    name = models.CharField(max_length=15, null=False, unique=False,
-                            help_text=_('Title of single Todo'))
-    completed = models.BooleanField(null=False, default=False, help_text=_(
-        'If all associated todo items are'
-        ' completed, todo can be marked as completed')
-    )
+    name = models.CharField(max_length=15, null=False, unique=False)
+    completed = models.BooleanField(null=False, default=False)
     visibility = models.CharField(max_length=4, choices=VISIBILITY,
                                   default=PRIVATE_VISIBILITY)
     tags = models.ManyToManyField(Tag, related_name='todo_tags')
     """
     Multiple tags can be associated with a Todo
     """
-    list = models.OneToOneField(TodoList, related_name='todo_list')
+    list = models.OneToOneField(TodoList, related_name='todo_list', null=True)
     """
     Todo belong only to single list
     """
@@ -125,6 +123,18 @@ class Todo(AuditableModel):
         can_complete = len(todos) == 0
         return can_complete
 
+    @property
+    def progress(self):
+        items = self.todos.filter(done=True)
+        count = len(items)
+        item_count = self.item_count
+        return count / item_count if item_count > 0 else 0.0
+
+    @property
+    def item_count(self):
+        items = self.todos.all()
+        return len(items) if items else 0
+
     @staticmethod
     def private_visibility():
         """
@@ -145,12 +155,9 @@ class TodoItem(AuditableModel):
 
     # fields
     todo = models.ForeignKey(Todo, related_name='todos')
-    title = models.CharField(max_length=15, null=False, unique=False,
-                             help_text=_('Title of todo item'))
-    description = models.TextField(max_length=450, help_text=_(
-        'Description of what is to be done for todo'))
-    done = models.BooleanField(null=False, default=False,
-                               help_text=_('Marks todo as done or note'))
+    title = models.CharField(max_length=15, null=False, unique=False)
+    description = models.TextField(max_length=45)
+    done = models.BooleanField(null=False, default=False)
     """
     Each todo has a list of tasks [TodoItem] to complete in order to complete
     a todo itself. This property [done] uniquely describes an item
@@ -175,5 +182,5 @@ class TodoItem(AuditableModel):
     def is_visible(self):
         todo = self.todo
         if todo is None:
-            raise RuntimeError('TodoItem should be associated with Todo')
+            raise RuntimeError(_('error.todo_item_no_todo_association'))
         return todo.is_visible()
