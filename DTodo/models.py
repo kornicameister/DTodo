@@ -35,6 +35,9 @@ class Tag(models.Model):
         """
         return True if self.details else False
 
+    def __str__(self):
+        return '[ %s ]' % self.word
+
 
 class TodoList(AuditableModel):
     PUBLIC_VISIBILITY = 'PUB'
@@ -67,19 +70,22 @@ class TodoList(AuditableModel):
     - 1 shared
     - unlimited public
     """
-    owned_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owned_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
     """
     Marks down a user that created a todo and is an owner of such todo.
     Note that some properties of todo list are unique in the namespace
     of the single user.
     """
-    pass
+
+    def __str__(self):
+        return '%s by %s' % (self.name, str(self.owned_by))
 
 
 class Todo(AuditableModel):
     # visibilite
     PUBLIC_VISIBILITY = 'PUB'
     PRIVATE_VISIBILITY = 'PRIV'
+    DEFAULT_VISIBILITY = PRIVATE_VISIBILITY
     VISIBILITY = (
         (PUBLIC_VISIBILITY, _('visibility.public')),
         (PRIVATE_VISIBILITY, _('visibility.private'))
@@ -94,11 +100,14 @@ class Todo(AuditableModel):
     """
     Multiple tags can be associated with a Todo
     """
-    list = models.OneToOneField(TodoList, related_name='todo_list', null=True)
+    list = models.OneToOneField(TodoList, related_name='todo_list', null=True,
+                                unique=False)
     """
     Todo belong only to single list
     """
-    owned_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owned_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 related_name='+',
+                                 unique=False)
     """
     Todo is owner by some user. This is different scope then user who could
     create a list todo is in because list could be public or shared therefore
@@ -119,20 +128,20 @@ class Todo(AuditableModel):
         return self.completed
 
     def can_complete(self):
-        todos = self.todos.filter(done=False)
+        todos = self.todoitem_set.filter(done=False)
         can_complete = len(todos) == 0
         return can_complete
 
     @property
     def progress(self):
-        items = self.todos.filter(done=True)
+        items = self.todoitem_set.filter(done=True)
         count = len(items)
         item_count = self.item_count
         return count / item_count if item_count > 0 else 0.0
 
     @property
     def item_count(self):
-        items = self.todos.all()
+        items = self.todoitem_set.all()
         return len(items) if items else 0
 
     @staticmethod
@@ -149,12 +158,15 @@ class Todo(AuditableModel):
         """
         return Todo.PUBLIC_VISIBILITY
 
+    def __str__(self):
+        return '[%s] %s' % (_(self.visibility), self.name)
+
 
 class TodoItem(AuditableModel):
     MAX_IMPORTANCE = 10
 
     # fields
-    todo = models.ForeignKey(Todo, related_name='todos')
+    todo = models.ForeignKey(Todo, unique=False, on_delete=models.CASCADE)
     title = models.CharField(max_length=15, null=False, unique=False)
     description = models.TextField(max_length=45)
     done = models.BooleanField(null=False, default=False)
@@ -184,3 +196,7 @@ class TodoItem(AuditableModel):
         if todo is None:
             raise RuntimeError(_('error.todo_item_no_todo_association'))
         return todo.is_visible()
+
+    def __str__(self):
+        return '[%s/%d] %s' % (
+            'D' if self.done else 'ND', self.importance, self.title)

@@ -1,8 +1,9 @@
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, CreateView, UpdateView, \
-    DeleteView
+    DeleteView, FormView
 from sortable_listview import SortableListView
+from DTodo.forms.forms import TodoForm
 
 from DTodo.models import Todo
 from DTodo.contants import PAGING_OPTS
@@ -22,6 +23,7 @@ class TodoListView(SortableListView):
             'default_direction': '-',
             'verbose_name': _('model.todo.completed')
         },
+        # custom sort field, look at get_queryset
         'progress': {
             'default_direction': '-',
             'verbose_name': _('model.todo.progress')
@@ -60,17 +62,31 @@ class TodoDetailView(DetailView):
     template_name = 'todo/todo-detail-view.html'
 
 
-class TodoCreateView(CreateView):
+class TodoCreateView(FormView):
     model = Todo
+    success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-create-view.html'
+    form_class = TodoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'buttons': {
+                'submit': _('btn.ok'),
+                'reset': _('btn.reset'),
+                'cancel': _('bt.cancel')
+            }
+        })
+        return context
 
 
 class TodoEditView(UpdateView):
     model = Todo
+    success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-edit-view.html'
 
 
 class TodoDeleteView(DeleteView):
     model = Todo
-    success_url = reverse_lazy('todo')
+    success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-delete-view.html'

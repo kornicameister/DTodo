@@ -12,11 +12,11 @@ class AuditableModel(models.Model):
     """
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    related_name="%(app_label)s_"
-                                                "%(class)s_created_by")
+                                                "%(class)s_created_by+")
     created_at = models.DateTimeField()
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    related_name="%(app_label)s_"
-                                                "%(class)s_updated_by")
+                                                "%(class)s_updated_by+")
     updated_at = models.DateTimeField()
 
     # opposite is to create own fields and overwrite pre_save
