@@ -70,7 +70,7 @@ def _on_todo_pre_save(**kwargs):
     """
     todo = kwargs.get('instance', None)
 
-    if not (todo and isinstance(todo, Todo)):
+    if not (todo and isinstance(todo, Todo) and not todo.owned_by_id):
         return False
 
     logger.info('pre_save[todo=%s]' % todo)

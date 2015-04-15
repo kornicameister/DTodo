@@ -30,6 +30,7 @@ class TodoListView(SortableListView):
         }
     }
     default_sort_field = 'completed'
+    ordering = ['name', 'updated_at']
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
@@ -40,21 +41,23 @@ class TodoListView(SortableListView):
         return context
 
     def get_queryset(self):
+        """
+        Provides handler for progress sorting property
+        As well as provides Todos only for currently logged
+        user as specified by owned_by ref
+        :return: query set
+        """
+
+        user = self.request.user
+        qs = Todo.objects.filter(owned_by_id=user.id).order_by(*self.ordering)
+
         if self.sort_field and self.sort_field == 'progress':
             sort_order = self.sort_order
-            res = super(SortableListView, self).get_queryset()
-            return sorted(res,
+            return sorted(qs,
                           key=lambda todo: todo.progress,
                           reverse=(False if sort_order == '-' else True))
 
-        return super().get_queryset()
-
-    def get_ordering(self):
-        ordering = Todo.Meta.ordering
-        if not ordering:
-            ordering = []
-
-        return ['name'] + ordering
+        return qs.order_by(self.sort)
 
 
 class TodoDetailView(DetailView):
