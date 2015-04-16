@@ -34,3 +34,24 @@ def percent_value(val):
     if not val:
         return 0.0
     return val * 100.0
+
+
+@register.inclusion_tag(file_name='bootstrap_progress.html', name='progressbar')
+def bootstrap_progress_bar(**kwargs):
+    contextual_class = kwargs.get('contextual_class', 'progress-bar-info')
+    min_value = float(kwargs.get('min_value', 0.0))
+    max_value = float(kwargs.get('max_value', 100.0))
+    value = float(kwargs.get('value', 0.0))
+
+    if not value or value == 0.0:
+        return 0.0
+
+    value *= 100.0
+
+    return {
+        'min_value': min_value,
+        'max_value': max_value,
+        'contextual_class': contextual_class,
+        'raw_value': value,
+        'value': float("{0:.1f}".format(value))
+    }

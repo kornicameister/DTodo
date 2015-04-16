@@ -1,0 +1,9 @@
+{% load humanize %}
+<div class="progress-bar {{ contextual_class }}"
+     role="progressbar"
+     aria-valuenow="{{ raw_value }}"
+     aria-valuemin="{{ min_value }}"
+     aria-valuemax="{{ max_value }}"
+     style="width: 100%;">
+    {{ value }} %
+</div>

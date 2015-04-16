@@ -64,14 +64,7 @@
                             {% endif %}
                             {% if todo.progress %}
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-info"
-                                         role="progressbar"
-                                         aria-valuenow="{% percent_value todo.progress %}"
-                                         aria-valuemin="0"
-                                         aria-valuemax="100"
-                                         style="width: {% percent_value todo.progress %}%;">
-                                        {% percent_value todo.progress %}%
-                                    </div>
+                                    {% progressbar value=todo.progress %}
                                 </div>
                             {% endif %}
                         </div>

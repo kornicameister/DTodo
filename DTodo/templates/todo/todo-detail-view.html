@@ -25,15 +25,8 @@
         <div class="panel-body">
             {# todo extract to inclusion tag and format the progress to DD  #}
             {% if todo.progress %}
-                <div class="progress">
-                    <div class="progress-bar progress-bar-info"
-                         role="progressbar"
-                         aria-valuenow="{% percent_value todo.progress %}"
-                         aria-valuemin="0"
-                         aria-valuemax="100"
-                         style="width: {% percent_value todo.progress %}%;">
-                        {% percent_value todo.progress %}%
-                    </div>
+                <div style="margin-bottom: 15px;padding-bottom: 20px;">
+                    {% progressbar value=todo.progress %}
                 </div>
             {% endif %}
             <div class="container-fluid">
