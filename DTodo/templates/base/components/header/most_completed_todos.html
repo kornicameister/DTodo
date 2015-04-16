@@ -1,31 +1,46 @@
-{# will list most completed todos #}
+{% load i18n dtodo_tags %}
+
 <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
     </a>
     <ul class="dropdown-menu dropdown-todos">
-        <li>
-            <a href="#">
-                <div>
-                    <p>
-                        <strong>Task 1</strong>
-                        <span class="pull-right text-muted">40% Complete</span>
-                    </p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                            <span class="sr-only">40% Complete (success)</span>
+        {% for todo in todos %}
+
+            <li>
+                <a href="{% url 'dtodo:todo:view' pk=todo.id %}">
+                    <div>
+                        <p>
+                            <strong>{{ todo.name }}</strong>
+                            <span class="pull-right text-muted">{% percent_humanize_value todo.progress %}%</span>
+                        </p>
+
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-success"
+                                 role="progressbar"
+                                 aria-valuenow="{{ todo.progress }}"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width: {% percent_humanize_value todo.progress %}%">
+                                <span class="sr-only">{% percent_humanize_value todo.progress %}%</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </li>
-        {# divider if not last todoitem #}
-        <li class="divider"></li>
-        <li>
-            <a class="text-center" href="#">
-                <strong>See All Tasks</strong>
-                <i class="fa fa-angle-right"></i>
-            </a>
-        </li>
+                </a>
+            </li>
+
+            {% if not forloop.last %}
+                <li class="divider"></li>
+            {% else %}
+                <li class="divider"></li>
+                <li>
+                    <a class="text-center" href="{% url 'dtodo:todo:all' %}">
+                        <strong>{% trans 'SEE_ALL_TODOS' %}</strong>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        {% empty %}
+            {% trans 'NO_TODO_TO_DISPLAY' %}
+        {% endfor %}
     </ul>
 </li>

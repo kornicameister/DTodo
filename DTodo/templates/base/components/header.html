@@ -1,4 +1,4 @@
-{% load dtodo_tags %}
+{% load dtodo_tags header_tags %}
 <nav class="navbar navbar-default navbar-static-top" role="navigation"
      style="margin-bottom: 0">
 
@@ -16,8 +16,8 @@
     </div>
 
     <ul class="nav navbar-top-links navbar-right">
-        {% include 'base/components/header/recent_todos.html' %}
-        {% include 'base/components/header/most_completed_todos.html' %}
+        {% recenttodos limit=5 %}
+        {% mostcompletedtodos limit=5 %}
         {% include 'base/components/header/user.html' %}
     </ul>
 

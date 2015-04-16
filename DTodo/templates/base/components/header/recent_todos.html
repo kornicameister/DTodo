@@ -1,29 +1,33 @@
-{# will be populated with recent todos #}
+{% load i18n %}
+
 <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
     </a>
     <ul class="dropdown-menu dropdown-todos">
-        <li>
-            <a href="#todo-url">
-                <div>
-                    <strong>Todo title</strong>
-            <span class="pull-right text-muted">
-                <em>todo-updated-at-date</em>
-            </span>
-                </div>
-                <div>
-                    truncated todo description
-                </div>
-            </a>
-        </li>
-        {# divider if not last todoitem #}
-        <li class="divider"></li>
-        <li>
-            <a class="text-center" href="#">
-                <strong>See All Tasks</strong>
-                <i class="fa fa-angle-right"></i>
-            </a>
-        </li>
+        {% for todo in todos %}
+            <li>
+                <a href="{% url 'dtodo:todo:view' pk=todo.id %}">
+                    <strong>{{ todo.name }}</strong>
+                    <span class="pull-right text-muted">
+                        <em>{{ todo.updated_at }}</em>
+                    </span>
+                </a>
+            </li>
+            {# divider if not last todoitem #}
+            {% if not forloop.last %}
+                <li class="divider"></li>
+            {% else %}
+                <li class="divider"></li>
+                <li>
+                    <a class="text-center" href="{% url 'dtodo:todo:all' %}">
+                        <strong>{% trans 'SEE_ALL_TODOS' %}</strong>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        {% empty %}
+            {% trans 'NO_TODO_TO_DISPLAY' %}
+        {% endfor %}
     </ul>
 </li>

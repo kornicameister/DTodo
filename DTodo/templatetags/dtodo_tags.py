@@ -36,6 +36,12 @@ def percent_value(val):
     return val * 100.0
 
 
+@register.simple_tag
+def percent_humanize_value(val, digits=1):
+    format_str = '{0:%df}' % digits
+    return float(format_str.format(percent_value(val)))
+
+
 @register.inclusion_tag(file_name='bootstrap_progress.html', name='progressbar')
 def bootstrap_progress_bar(**kwargs):
     contextual_class = kwargs.get('contextual_class', 'progress-bar-info')
