@@ -23,6 +23,19 @@
             </div>
         </div>
         <div class="panel-body">
+            {# todo extract to inclusion tag and format the progress to DD  #}
+            {% if todo.progress %}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info"
+                         role="progressbar"
+                         aria-valuenow="{% percent_value todo.progress %}"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         style="width: {% percent_value todo.progress %}%;">
+                        {% percent_value todo.progress %}%
+                    </div>
+                </div>
+            {% endif %}
             <div class="container-fluid">
                 <div class="col-lg-3">
                     <ul class="list-group">
@@ -37,20 +50,74 @@
                             <a href="#">{{ todo.owned_by.username }}</a>
                         </li>
                     </ul>
+                    <div class="btn-group btn-group-vertical center-block"
+                         role="group" aria-label="todo-actions">
+                        <a href="{% url 'dtodo:todo:edit' pk=todo.id %}"
+                           role="button" class="btn btn-success">
+                            {% trans 'btn.edit' %}
+                        </a>
+                        <a href="{% url 'dtodo:todo:delete' pk=todo.id %}"
+                           role="button" class="btn btn-warning">
+                            {% trans 'btn.delete' %}
+                        </a>
+                        {% if todo.can_complete %}
+                            <a href="{% url 'dtodo:todo:delete' pk=todo.id %}"
+                               role="button" class="btn btn-success">
+                                {% trans 'btn.todo.complete' %}
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="table-responsive">
-                        {# add table here with all task items listed using some js to provide searching etc #}
-                        <table class="table table-striped table-hover table-condensed">
-
-                        </table>
-                    </div>
+                    {# add table here with all task items listed using some js to provide searching etc #}
+                    <table data-classes="table table-hover table-condensed"
+                           data-striped="true"
+                           data-show-columns="true"
+                           data-sort-name="name"
+                           data-sort-order="desc"
+                           data-toggle="table">
+                        <thead>
+                        <tr>
+                            <th data-switchable="false" data-sortable="true"
+                                class="col-xs-1">{% trans 'model.TodoItem.title' %}</th>
+                            <th class="col-xs-2">{% trans 'model.TodoItem.description' %}</th>
+                            <th data-sortable="true"
+                                class="col-xs-1">{% trans 'model.TodoItem.importance' %}</th>
+                            <th data-sortable="true"
+                                class="col-xs-1">{% trans 'model.TodoItem.done' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in todo.todoitem_set.all %}
+                            <tr>
+                                <td data-field="title">
+                                    {# add url to go to edit view of the task #}
+                                    {{ item.title }}
+                                </td>
+                                <td data-field="description">{{ item.description }}</td>
+                                <td data-field="importance">{{ item.importance }}</td>
+                                <td data-field="done">
+                                    {# todo add posibility to complete here #}
+                                    {% if item.done %}
+                                        <i class="fa fa-check fa-lg"
+                                           title="{% trans 'todoitem.done' %}"></i>
+                                    {% else %}
+                                        <i class="fa fa-times fa-lg"
+                                           title="{% trans 'todoitem.notdone' %}"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="panel-footer">
             {% for tag in todo.tags.all %}
-                {{ tag }},
+                <span class="text-info">
+                    {{ tag }}
+                </span>
             {% endfor %}
         </div>
     </div>

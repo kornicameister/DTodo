@@ -65,13 +65,6 @@ class TodoDetailView(DetailView):
     context_object_name = 'todo'
     template_name = 'todo/todo-detail-view.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({
-            'items': self.object.todoitem_set.all().order_by('done')
-        })
-        return context
-
 
 class TodoCreateView(CreateView):
     model = Todo

@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 
 from DTodo.common.models import AuditableModel
@@ -186,7 +185,8 @@ class TodoItem(AuditableModel):
     """
     importance = models.PositiveSmallIntegerField(
         default=1,
-        validators=validators.MaxValueValidator(limit_value=MAX_IMPORTANCE))
+        # validators=validators.MaxValueValidator(limit_value=MAX_IMPORTANCE)
+    )
     """
     Used to order the items on the list from the most to less important one.
     Importance determines which todos are supposed to be handled by the

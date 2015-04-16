@@ -15,10 +15,10 @@ urlpatterns = [
     url(regex=r'^/new',
         view=TodoCreateView.as_view(),
         name='create'),
-    url(regex=r'^/edit/(?P<id>\d+)',
+    url(regex=r'^/edit/(?P<pk>\d+)',
         view=TodoEditView.as_view(),
         name='edit'),
-    url(regex=r'^/delete/(?P<id>\d+)',
+    url(regex=r'^/delete/(?P<pk>\d+)',
         view=TodoDeleteView.as_view(),
         name='delete'),
 ]
