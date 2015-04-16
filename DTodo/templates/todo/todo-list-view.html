@@ -45,7 +45,7 @@
         {% include 'sortable_listview/sort_links.html' %}
         <ul class="list-group">
             {% for todo in object_list %}
-                <li class="list-group-item {% todo_contextual_class_visibility todo.visibility %}">
+                <li class="list-group-item list-group-item-{% todo_contextual_class_visibility todo.visibility %}">
                     <h4 class="list-group-item-heading">
                         <a href="{% url 'dtodo:todo:view' pk=todo.id %}">{{ todo.name }}</a>
                         <span class="badge">{{ todo.item_count }}</span>

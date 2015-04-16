@@ -62,7 +62,15 @@ class TodoListView(SortableListView):
 
 class TodoDetailView(DetailView):
     model = Todo
+    context_object_name = 'todo'
     template_name = 'todo/todo-detail-view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'items': self.object.todoitem_set.all().order_by('done')
+        })
+        return context
 
 
 class TodoCreateView(CreateView):
@@ -87,7 +95,6 @@ class TodoEditView(UpdateView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-edit-view.html'
-
 
 class TodoDeleteView(DeleteView):
     model = Todo

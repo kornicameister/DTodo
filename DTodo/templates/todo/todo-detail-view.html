@@ -1,9 +1,57 @@
 {% extends 'base/base_site.html' %}
-{% load i18n django_bootstrap_breadcrumbs bootstrap3 %}
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 dtodo_tags %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb "DTodo" "dtodo:index" %}
     {% breadcrumb "Todos" "dtodo:todo:all" %}
-    {% breadcrumb "View" "dtodo:todo:single" %}
+    {% breadcrumb "View" "dtodo:todo:view" %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-{% todo_contextual_class_visibility todo.visibility %}">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {{ todo.name }} /
+                {% if todo.completed %}
+                    <i class="fa fa-check fa-lg"
+                       title="{% trans 'todo.completed' %}"></i>
+                {% else %}
+                    <i class="fa fa-times fa-lg"
+                       title="{% trans 'todo.inprogres' %}"></i>
+                {% endif %}
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="col-lg-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="text-primary">{% trans 'model.Todo.list' %}</span>
+                            ::
+                            <a href="#">{{ todo.list.name }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-primary">{% trans 'model.Todo.owned_by' %}</span>
+                            ::
+                            <a href="#">{{ todo.owned_by.username }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="table-responsive">
+                        {# add table here with all task items listed using some js to provide searching etc #}
+                        <table class="table table-striped table-hover table-condensed">
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            {% for tag in todo.tags.all %}
+                {{ tag }},
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

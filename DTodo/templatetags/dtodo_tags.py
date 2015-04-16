@@ -24,9 +24,9 @@ def todo_contextual_class_visibility(visiblity):
     if not visiblity:
         return ''
     elif visiblity == Todo.PUBLIC_VISIBILITY:
-        return 'list-group-item-info'
+        return 'info'
     else:
-        return 'list-group-item-warning'
+        return 'warning'
 
 
 @register.simple_tag
