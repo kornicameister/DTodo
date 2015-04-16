@@ -1,0 +1,20 @@
+{% extends "registration/base_registration.html" %}
+{% load i18n bootstrap3 %}
+
+{% block pagetitle %} {% trans 'register' %}{% endblock %}
+{% block content %}
+    <form action="{% url 'dtodo:index' %}" method="post">
+        {% csrf_token %}
+
+        {% block form.errors %}
+            {% bootstrap_form_errors form layout='inline' %}
+        {% endblock %}
+
+        {% block form.content %}
+            {% bootstrap_form form layout='horizontal' %}
+        {% endblock %}
+
+        {% buttons submit='Login' %}
+        {% endbuttons %}
+    </form>
+{% endblock %}

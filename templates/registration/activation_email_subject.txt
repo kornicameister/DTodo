@@ -1,0 +1,2 @@
+Aktywuj swoje konto na djangoproject.com - masz {{ expiration_days }} dni na aktywację!
+

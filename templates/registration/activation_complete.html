@@ -1,0 +1,17 @@
+{% extends "registration/base_registration.html" %}
+{% load i18n %}
+
+{% block pagetitle %} {% trans 'activation_complete' %} {% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {% trans 'activation_complete' %}
+            </div>
+        </div>
+        <div class="panel-body">
+            {% trans 'activation_complete_msg' %}
+        </div>
+    </div>
+{% endblock %}

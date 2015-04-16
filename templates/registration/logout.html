@@ -1,0 +1,19 @@
+{% extends "registration/base_registration.html" %}
+{% load i18n %}
+
+{% block pagetitle %} {% trans 'logout' %} {% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {% trans 'logout_success_mgs' %}
+            </div>
+        </div>
+        <div class="panel-body">
+            You have been successfully logged out. You can either move to
+            <a href="{% url 'dtodo:index' %}">index page</a> or <a
+                href="/accounts/login">log in</a> again.
+        </div>
+    </div>
+{% endblock %}

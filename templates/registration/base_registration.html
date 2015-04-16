@@ -1,0 +1,29 @@
+{% extends 'abstract/abstract_site.html' %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Register" "accounts:registration_register" %}
+{% endblock %}
+
+{% block navigation_items %}
+    {# add todo to display logut if logged in #}
+    <li role="presentation">
+        {# add active class handling here, based on fiven view #}
+        <a href="/accounts/login">
+            <i class="fa fa-user fa-lg"></i>{% trans 'login' %}
+        </a>
+    </li>
+    <li role="presentation">
+        {# add active class handling here, based on fiven view #}
+        <a href="/accounts/logout">
+            <i class="fa fa-user fa-lg"></i>{% trans 'logout' %}
+        </a>
+    </li>
+    <li role="presentation">
+        {# add active class handling here, based on fiven view #}
+        <a href="{% url 'accounts:registration_register' %}">
+            <i class="fa fa-user fa-lg"></i>{% trans 'registration_register' %}
+        </a>
+    </li>
+{% endblock %}

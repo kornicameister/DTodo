@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'sortable_listview',
     'bootstrap3',
     'django_filters',
+    'registration',
     'DTodo',  # core application
 )
 
@@ -144,3 +145,18 @@ BOOTSTRAP3 = {
         _STATIC_ASSETS, _BOOTSTRAP_DIR),
     'include_jquery': True
 }
+
+LOGIN_REDIRECT_URL = "/dtodo/"
+LOGIN_URL = "/accounts/login/"
+LOGOUT_URL = "/accounts/logout/"
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_OPEN = True  # put False to disable accounts registration
+
+# to be modified to send actual emails
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1023
+EMAIL_HOST_USER = 'username'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'app-messages')
+# to be modified to send actual emails

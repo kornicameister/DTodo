@@ -1,0 +1,37 @@
+{% extends "registration/base_registration.html" %}
+{% load i18n %}
+
+{% block pagetitle %} {% trans 'activate' %} {% endblock %}
+
+{% block content %}
+    {% if account %}
+        <div class="panel panel-primary">
+    {% else %}
+        <div class="panel panel-danger">
+    {% endif %}
+<div class="panel-heading">
+    <div class="panel-title">
+        {% if account %}
+            {% trans 'activate_ok' %}
+        {% else %}
+            {% trans 'activate_not_ok' %}
+        {% endif %}
+    </div>
+</div>
+<div class="panel-body">
+    {% load humanize %}
+    {% if account %}
+        <p>
+            Your account has been activated. Go to <a href="/accounts/login/">Login</a>
+            to log in.
+        </p>
+    {% else %}
+        <p>
+            Activation Failed. Mostly like your key it outdated. It it active
+            only
+            for {{ expiration_days|apnumber }} since registration
+        </p>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

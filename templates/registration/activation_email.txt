@@ -1,0 +1,9 @@
+{% load humanize %}
+Witamy {{ client }}
+Ktoś, mamy nadzieję, żę Ty, zarejestrował się w djangoproject.com używając tego adresu email.
+Jeśli to nie Pan/Pani a jesteś zainteresowany aktywacją konta, kliknij na link poniżej, albo skopjuj i wklej do przeglądarki następujący adres:
+
+http://127.0.0.1:8000/accounts/activate/{{ activation_key }}/
+
+Jeśli nie jest Pan/Pani zainteresowany/na prosimy o zignorowanie tego maila. Nie będziemy więcej wysyłać żadnych wiadomości na tą skrzynkę odbiorczą.
+Konto zostanie natomiast usunięte automatycznie po upływie {{ expiration_days|apnumber }} dni.

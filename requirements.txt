@@ -4,3 +4,4 @@ django-sortable-listview>=0.41
 django-bootstrap3>=5.3.1
 django-filter
 django-tools>=0.28.0
+django-registration-redux

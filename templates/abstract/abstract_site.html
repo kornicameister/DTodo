@@ -1,0 +1,88 @@
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 cache %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+          lang="{{ LANGUAGE_CODE|default:"en-us" }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="kornicameister@gmail.com"/>
+    {% block blockbots %}
+        <meta name="robots" content="noindex, nofollow"/>
+    {% endblock %}
+
+    <title>
+        {% block pagetitle %}
+        {% endblock %}
+    </title>
+
+    {# include css/js files #}
+    {% include 'abstract/head/css.html' %}
+    {% include 'abstract/head/js.html' %}
+
+    {# allow to include custom css/js per site #}
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock %}
+
+</head>
+<body class="dt-body">
+<div class="dt-body-content">
+
+    <nav class="navbar navbar-default navbar-static-top" role="navigation"
+         style="margin-bottom: 0">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        <span class="navbar-brand">
+            {% block header_branding %}
+            {% endblock %}
+        </span>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            {% block header_items %}
+            {% endblock %}
+        </ul>
+
+    </nav>
+
+    {% cache 10 navigation %}
+        <nav class="navbar navbar-default col-lg-2 col-md-2 col-sm-2"
+             role="navigation">
+            <div class="navbar-collapse">
+                <ul class="nav nav-pills nav-stacked">
+                    {% block navigation_items %}
+                    {% endblock %}
+                </ul>
+            </div>
+        </nav>
+    {% endcache %}
+
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <div class="container">
+            {% block breadcrumbs %}
+                {% clear_breadcrumbs %}
+                {% breadcrumb_safe "<i class='fa fa-home'></i>" "" %}
+            {% endblock %}
+            {% render_breadcrumbs %}
+
+            <div class="dt-content well">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <footer>
+        {% block footer_content %}
+        {% endblock %}
+    </footer>
+</div>
+</body>
+</html>

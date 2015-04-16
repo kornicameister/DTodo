@@ -7,7 +7,7 @@ from DTodo.models import Todo
 register = template.Library()
 
 
-@register.inclusion_tag(file_name='base/components/header/recent_todos.html',
+@register.inclusion_tag(file_name='base/components/recent_todos.html',
                         name='recenttodos')
 def recent_todos_tag(**kwargs):
     current_user = ThreadLocal.get_current_user()
@@ -20,7 +20,7 @@ def recent_todos_tag(**kwargs):
 
 
 @register.inclusion_tag(
-    file_name='base/components/header/most_completed_todos.html',
+    file_name='base/components/most_completed_todos.html',
     name='mostcompletedtodos')
 def most_completed_todos_tag(**kwargs):
     current_user = ThreadLocal.get_current_user()

@@ -1,48 +1,40 @@
-{% load i18n dtodo_tags django_bootstrap_breadcrumbs bootstrap3 %}
-{% get_current_language as LANGUAGE_CODE %}
+{% extends 'abstract/abstract_site.html' %}
+{% load i18n dtodo_tags header_tags django_bootstrap_breadcrumbs bootstrap3 %}
 
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
-          lang="{{ LANGUAGE_CODE|default:"en-us" }}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="kornicameister@gmail.com"/>
-    {% block blockbots %}
-        <meta name="robots" content="noindex, nofollow"/>
-    {% endblock %}
+{% block pagetitle %}
+    {{ title|default:"DTodo" }}
+{% endblock %}
 
-    <title>{{ title|default:"DTodo" }}</title>
-
-    {# include css/js files #}
-    {% include 'base/head/css.html' %}
+{% block extra_css %}
     {% include 'base/head/dtodo_css.html' %}
-    {% include 'base/head/js.html' %}
+{% endblock %}
 
-    {# allow to include custom css/js per site #}
-    {% block extra_css %}{% endblock %}
-    {% block extra_js %}{% endblock %}
+{% block header_branding %}
+    DTodo 1.0 /
+    <span class="text-primary text-nowrap">{% pageHeader title default="DTodo" %}</span>
+{% endblock %}
 
-</head>
-<body class="dt-body">
-<div class="dt-body-content">
-    {% include 'base/components/header.html' %}
-    {% include 'base/components/navigation.html' %}
-    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-        <div class="container">
-            {% block breadcrumbs %}
-                {% clear_breadcrumbs %}
-                {% breadcrumb_safe "<i class='fa fa-home'></i>" "" %}
-            {% endblock %}
-            {% render_breadcrumbs %}
+{% block header_items %}
+    {% recenttodos limit=5 %}
+    {% mostcompletedtodos limit=5 %}
+    {% include 'base/header-user.html' %}
+{% endblock %}
 
-            <div class="dt-content well">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </div>
-    </div>
-    {% include 'base/components/footer.html' %}
-</div>
-</body>
-</html>
+{% block navigation_items %}
+    <li role="presentation">
+        {# add active class handling here, based on fiven view #}
+        <a href="{% url 'dtodo:index' %}">
+            <i class="fa fa-home fa-lg"></i>{% trans 'Index' %}
+        </a>
+    </li>
+    <li role="presentation">
+        <a href="{% url 'dtodo:todo:all' %}">
+            <i class="fa fa-envelope fa-lg"></i>{% trans 'models.Todo' %}
+        </a>
+    </li>
+    <li role="presentation">
+        <a href="{% url 'dtodo:tag:all' %}">
+            <i class="fa fa-tags fa-lg"></i>{% trans 'models.Tag' %}
+        </a>
+    </li>
+{% endblock %}
