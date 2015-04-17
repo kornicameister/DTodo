@@ -102,12 +102,14 @@ class Todo(AuditableModel):
     visibility = models.CharField(max_length=4,
                                   choices=VISIBILITY,
                                   default=PRIVATE_VISIBILITY)
-    tags = models.ManyToManyField(Tag, related_name='todo_tags')
+    tags = models.ManyToManyField(Tag, related_name='todo_tags', blank=True)
     """
-    Multiple tags can be associated with a Todo
+    Multiple tags can be associated with a Todo. However this
+    field is not mandatory.
     """
     list = models.ForeignKey(TodoList,
                              related_name='todo_list',
+                             blank=True,
                              null=True,
                              unique=False)
     """
