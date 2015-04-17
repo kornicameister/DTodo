@@ -15,8 +15,8 @@
 {% endblock %}
 
 {% block header_items %}
-    {% recenttodos limit=5 %}
-    {% mostcompletedtodos limit=5 %}
+    {% recenttodos user=request.user limit=5 %}
+    {% mostcompletedtodos user=request.user limit=5 %}
     {% user_menu user=request.user %}
 {% endblock %}
 
