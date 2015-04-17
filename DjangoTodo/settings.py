@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django_filters',
     'registration',
     'DTodo',  # core application
+    'DTodoRegister'  # register overrides
 )
 
 MIDDLEWARE_CLASSES = (

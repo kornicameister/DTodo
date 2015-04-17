@@ -5,19 +5,18 @@ from . import views
 
 
 urlpatterns = [
-    url(regex=r'^$',
-        view=never_cache(views.index_view),
-        name='index'),
+    url(r'^$', view=never_cache(views.index_view), name='index'),
     url(r'^todo', include('DTodo.view.todo.urls', namespace='todo')),
     url(r'^tag', include('DTodo.view.tag.urls', namespace='tag')),
+    url(r'^user', include('registration.auth_urls', namespace='user'))
 ]
 
 # urlpatterns += [
 # url(r'^todo-list/$', view=None, name="todo-list"),
 # url(r'^todo-list/(?P<id>\d+)', view=None,
 # name="todo-list:read"),
-#     url(r'^todo-list/new', view=None, name="todo-list:create"),
-#     url(r'^todo-list/edit/(?P<id>\d+)', view=None,
+# url(r'^todo-list/new', view=None, name="todo-list:create"),
+# url(r'^todo-list/edit/(?P<id>\d+)', view=None,
 #         name="todo-list:edit"),
 #     # _todo-list views
 #

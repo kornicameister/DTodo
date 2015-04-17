@@ -89,6 +89,7 @@ class TodoEditView(UpdateView):
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-edit-view.html'
 
+
 class TodoDeleteView(DeleteView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
