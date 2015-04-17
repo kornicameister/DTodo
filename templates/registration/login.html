@@ -3,7 +3,7 @@
 
 {% block pagetitle %} {% trans 'register' %}{% endblock %}
 {% block content %}
-    <form action="{% url 'dtodo:index' %}" method="post">
+    <form action="" method="post">
         {% csrf_token %}
 
         {% block form.errors %}

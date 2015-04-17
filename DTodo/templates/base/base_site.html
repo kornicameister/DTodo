@@ -17,7 +17,7 @@
 {% block header_items %}
     {% recenttodos limit=5 %}
     {% mostcompletedtodos limit=5 %}
-    {% include 'base/header-user.html' %}
+    {% user_menu user=request.user %}
 {% endblock %}
 
 {% block navigation_items %}

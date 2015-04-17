@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, CreateView, UpdateView, \
     DeleteView
@@ -49,7 +51,12 @@ class TodoListView(SortableListView):
         """
 
         user = self.request.user
-        qs = Todo.objects.filter(owned_by_id=user.id).order_by(*self.ordering)
+        if user.is_authenticated():
+            qs = Todo.objects.filter(owned_by_id=user.id)
+        else:
+            qs = Todo.objects.filter(visibility=Todo.public_visibility())
+
+        qs = qs.order_by(*self.ordering)
 
         if self.sort_field and self.sort_field == 'progress':
             sort_order = self.sort_order
@@ -65,12 +72,20 @@ class TodoDetailView(DetailView):
     context_object_name = 'todo'
     template_name = 'todo/todo-detail-view.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class TodoCreateView(CreateView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-create-view.html'
     form_class = TodoForm
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -89,8 +104,16 @@ class TodoEditView(UpdateView):
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-edit-view.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class TodoDeleteView(DeleteView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-delete-view.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
