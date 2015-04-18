@@ -7,3 +7,21 @@
     {% breadcrumb "Todos" "dtodo:todo:all" %}
     {% breadcrumb "New" "dtodo:todo:create" %}
 {% endblock %}
+
+{% block form.content %}
+    {{ block.super }}
+    <div class="container-fluid" style="margin-top: 10px">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">Tasks</div>
+            </div>
+            {{ todoitem_form.management_form }}
+            {# todo missing adding dynamic formset #}
+            <div class="panel-body">
+                {% bootstrap_formset_errors todoitem_form layout='horizontal' %}
+                {% bootstrap_formset todoitem_form layout='horizontal' size='sm' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

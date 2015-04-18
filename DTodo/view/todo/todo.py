@@ -1,13 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
+from django.forms import inlineformset_factory
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, CreateView, UpdateView, \
     DeleteView
 from sortable_listview import SortableListView
 
-from DTodo.forms.forms import TodoForm
-from DTodo.models import Todo
+from DTodo.forms.forms import TodoForm, TodoItemForm
+from DTodo.models import Todo, TodoItem
 from DTodo.contants import PAGING_OPTS
 
 
@@ -77,15 +79,79 @@ class TodoDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
+TodoItemFormSet = inlineformset_factory(
+    parent_model=Todo,
+    model=TodoItem,
+    form=TodoItemForm
+)
+
+
 class TodoCreateView(CreateView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-create-view.html'
     form_class = TodoForm
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.object = None
+
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests and instantiates blank versions of the form
+        and its inline formsets.
+        """
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        todoitem_form = TodoItemFormSet()
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+                todoitem_form=todoitem_form
+            )
+        )
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests, instantiating a form instance and its inline
+        formsets with the passed POST variables and then checking them for
+        validity.
+        """
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        todoitem_form = TodoItemFormSet(self.request.POST)
+
+        if form.is_valid() and todoitem_form.is_valid():
+            return self._form_valid(form, todoitem_form)
+        else:
+            return self._form_invalid(form, todoitem_form)
+
+    def _form_valid(self, form, todoitem_form):
+        """
+        Called if all forms are valid. Creates a Recipe instance along with
+        associated Ingredients and Instructions and then redirects to a
+        success page.
+        """
+        self.object = form.save()
+        todoitem_form.instance = self.object
+        todoitem_form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def _form_invalid(self, form, todoitem_form):
+        """
+        Called if a form is invalid. Re-renders the context data with the
+        data-filled forms and errors.
+        """
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+                todoitem_form=todoitem_form
+            )
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
