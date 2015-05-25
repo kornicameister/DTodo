@@ -7,15 +7,12 @@
 {% endblock %}
 
 {% block navigation_items %}
-    {# add todo to display logut if logged in #}
     <li role="presentation">
-        {# add active class handling here, based on fiven view #}
         <a href="/accounts/login">
             <i class="fa fa-user fa-lg"></i>{% trans 'login' %}
         </a>
     </li>
     <li role="presentation">
-        {# add active class handling here, based on fiven view #}
         <a href="/accounts/logout">
             <i class="fa fa-user fa-lg"></i>{% trans 'logout' %}
         </a>

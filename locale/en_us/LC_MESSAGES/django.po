@@ -1,49 +1,239 @@
-#: .\DTodo\models.py:42 .\DTodo\models.py:82
+#: .\DTodo\admin.py:80
+msgid "Mark item as completed"
+msgstr "Mark item as completed"
+
+#: .\DTodo\admin.py:81
+msgid "Mark item as not completed"
+msgstr "Mark item as not completed"
+
+#: .\DTodo\models.py:46 .\DTodo\models.py:92
 msgid "visibility.public"
 msgstr "Public"
 
-#: .\DTodo\models.py:43 .\DTodo\models.py:83
+#: .\DTodo\models.py:47 .\DTodo\models.py:93
 msgid "visibility.private"
 msgstr "Private"
 
-#: .\DTodo\models.py:44
+#: .\DTodo\models.py:48
 msgid "visibility.shared"
 msgstr "Shared"
 
-#: .\DTodo\models.py:51
-msgid "Title of Todo list"
-msgstr ""
-
-#: .\DTodo\models.py:171
+#: .\DTodo\models.py:208
 msgid "error.todo_item_no_todo_association"
 msgstr "TodoItem should be associated with Todo"
 
-#: .\DTodo\templates\base\components\navigation.html:8
+#: .\DTodo\templates\base\base_site.html:27
 msgid "Index"
-msgstr ""
+msgstr "Index"
 
-#: .\DTodo\templates\base\components\navigation.html:13
-msgid "Todo"
-msgstr ""
+#: .\DTodo\templates\base\base_site.html:32
+msgid "models.Todo"
+msgstr "Todo"
 
-#: .\DTodo\templates\todo\todo-list-view.html:13
-msgid "Select All"
-msgstr ""
+#: .\DTodo\templates\base\base_site.html:37
+msgid "models.Tag"
+msgstr "Tag"
 
-#: .\DTodo\templates\todo\todo-list-view.html:22
-msgid "FILTER_BY"
-msgstr "Filter by"
+#: .\DTodo\templates\base\components\header-user.html:14
+msgid "btn.logout"
+msgstr "Logout"
 
-#: .\DTodo\templates\todo\todo-list-view.html:45
+#: .\DTodo\templates\base\components\header-user.html:18
+msgid "btn.login"
+msgstr "Login"
+
+#: .\DTodo\templates\base\components\most_completed_todos.html:37
+#: .\DTodo\templates\base\components\recent_todos.html:24
+msgid "SEE_ALL_TODOS"
+msgstr "All todos"
+
+#: .\DTodo\templates\base\components\most_completed_todos.html:43
+#: .\DTodo\templates\base\components\recent_todos.html:30
+#: .\DTodo\templates\todo\todo-list-view.html:77
 msgid "NO_TODO_TO_DISPLAY"
 msgstr "There is currently no todo to display"
 
-#: .\templates\admin\base_site.html:3
-msgid "Django site admin"
-msgstr ""
+#: .\DTodo\templates\tag\tag-list-view.html:11
+msgid "model.Tag.allTags"
+msgstr "All tags"
 
+#: .\DTodo\templates\tag\tag-list-view.html:18
+#: .\DTodo\templates\todo\todo-list-view.html:20
+msgid "btn.add"
+msgstr "Dodaj"
+
+#: .\DTodo\templates\tag\tag-list-view.html:41
+#, fuzzy
+#| msgid "NO_TODO_TO_DISPLAY"
+msgid "NO_TAGS_TO_DISPLAY"
+msgstr "There is currently no tags to display"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:18
+msgid "todo.completed"
+msgstr "Completed"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:21
+msgid "todo.inprogres"
+msgstr "In progress"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:36
+msgid "model.Todo.list"
+msgstr "List name"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:41
+msgid "model.Todo.owned_by"
+msgstr "Owner"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:50
+msgid "btn.edit"
+msgstr "Edit"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:54
+#, fuzzy
+#| msgid "btn.selectAll"
+msgid "btn.delete"
+msgstr "Select All"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:59
+msgid "btn.todo.complete"
+msgstr "Complete"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:75
+msgid "model.TodoItem.title"
+msgstr "Title"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:76
+msgid "model.TodoItem.description"
+msgstr "Description"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:78
+msgid "model.TodoItem.importance"
+msgstr "Importance"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:80
+msgid "model.TodoItem.done"
+msgstr "Done"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:96
+msgid "todoitem.done"
+msgstr "Done"
+
+#: .\DTodo\templates\todo\todo-detail-view.html:99
+msgid "todoitem.notdone"
+msgstr "Not done"
+
+#: .\DTodo\templates\todo\todo-list-view.html:12
+msgid "model.Todo.allTodos"
+msgstr "All todos"
+
+#: .\DTodo\templates\todo\todo-list-view.html:17
 msgid "btn.selectAll"
 msgstr "Select All"
+
+#: .\DTodo\templates\todo\todo-list-view.html:29
+msgid "FILTER_BY"
+msgstr "Filter by"
+
+#: .\DTodo\view\tag\tag.py:20 .\DTodo\view\todo\todo.py:181
+msgid "btn.ok"
+msgstr "Ok"
+
+#: .\DTodo\view\tag\tag.py:21 .\DTodo\view\todo\todo.py:182
+#, fuzzy
+#| msgid "btn.selectAll"
+msgid "btn.reset"
+msgstr "Select All"
+
+#: .\DTodo\view\tag\tag.py:22 .\DTodo\view\todo\todo.py:183
+msgid "btn.cancel"
+msgstr "Cancel"
+
+#: .\DTodo\view\tag\tag.py:37
+msgid "model.Tag.word"
+msgstr "Word"
+
+#: .\DTodo\view\todo\todo.py:25
+msgid "model.todo.name"
+msgstr "Name"
+
+#: .\DTodo\view\todo\todo.py:29
+msgid "model.todo.completed"
+msgstr "Completed"
+
+#: .\DTodo\view\todo\todo.py:34
+msgid "model.todo.progress"
+msgstr "Progress"
+
+#: .\templates\admin\base_site.html:3
+msgid "Django site admin"
+msgstr "Django Todo"
+
+#: .\templates\registration\activate.html:4
+msgid "activate"
+msgstr "Activate"
+
+#: .\templates\registration\activate.html:15
+msgid "activate_ok"
+msgstr "Activated"
+
+#: .\templates\registration\activate.html:17
+msgid "activate_not_ok"
+msgstr "Not activated"
+
+#: .\templates\registration\activation_complete.html:4
+#: .\templates\registration\activation_complete.html:10
+msgid "activation_complete"
+msgstr "Activation completed"
+
+#: .\templates\registration\activation_complete.html:14
+msgid "activation_complete_msg"
+msgstr "Activation of your account has completed with success"
+
+#: .\templates\registration\base_registration.html:14
+msgid "login"
+msgstr "Login"
+
+#: .\templates\registration\base_registration.html:20
+#: .\templates\registration\logout.html:4
+msgid "logout"
+msgstr "Logout"
+
+#: .\templates\registration\base_registration.html:26
+msgid "registration_register"
+msgstr "Registration"
+
+#: .\templates\registration\login.html:4
+#: .\templates\registration\registration_form.html:4
+msgid "register"
+msgstr "Register"
+
+#: .\templates\registration\logout.html:10
+msgid "logout_success_mgs"
+msgstr "You've been successfully logged out"
+
+#: .\templates\registration\registration_closed.html:4
+msgid "registration_closed"
+msgstr "Registration disabled"
+
+#: .\templates\registration\registration_closed.html:10
+msgid "registration_closed_title"
+msgstr "For some reasons registration has been currently disabled"
+
+#: .\templates\registration\registration_closed.html:14
+msgid "registration_closed_msg"
+msgstr "For some reasons registration has been currently disabled"
+
+#: .\templates\registration\registration_complete.html:4
+msgid "registration_complete"
+msgstr "Registration completed"
+
+#: .\templates\registration\registration_complete.html:10
+msgid "registration_complete_title"
+msgstr "Registration completed"
+
+#: .\templates\registration\registration_complete.html:14
+msgid "registration_complete_msg"
+msgstr "Activation email has been sent to You."
 
 #~ msgid "todo.name.help_text"
 #~ msgstr "Title of single Todo"

@@ -11,6 +11,9 @@
 {% block form.content %}
     {{ block.super }}
     <div class="container-fluid" style="margin-top: 10px">
+        <div class="col-sm-6">
+            {% bootstrap_formset_errors todoitem_form layout='inline' type='non_fields' %}
+        </div>
         <div class="panel">
             <div class="panel-heading">
                 <div class="panel-title">Tasks</div>

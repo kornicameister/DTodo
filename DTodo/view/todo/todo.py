@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
@@ -8,7 +9,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, \
     DeleteView
 from sortable_listview import SortableListView
 
-from DTodo.forms.forms import TodoForm, TodoItemForm
+from DTodo.forms.forms import TodoItemForm
 from DTodo.models import Todo, TodoItem
 from DTodo.contants import PAGING_OPTS
 
@@ -90,7 +91,12 @@ class TodoCreateView(CreateView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-create-view.html'
-    form_class = TodoForm
+    fields = (
+        'name',
+        'visibility',
+        'tags',
+        'list'
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -125,7 +131,22 @@ class TodoCreateView(CreateView):
         form = self.get_form(form_class)
         todoitem_form = TodoItemFormSet(self.request.POST)
 
-        if form.is_valid() and todoitem_form.is_valid():
+        is_valid = form.is_valid() and todoitem_form.is_valid()
+
+        ti_names = []
+        if is_valid:
+            forms = todoitem_form.forms
+            for ti_form in forms:
+                ti_name = ti_form.cleaned_data['title']
+                if not ti_name in ti_names:
+                    ti_names.append(ti_name)
+                else:
+                    ti_form.add_error(None, ValidationError(
+                        '%s duplicates already defined item title' % ti_name))
+
+        is_valid = len(ti_names) == 0
+
+        if is_valid:
             return self._form_valid(form, todoitem_form)
         else:
             return self._form_invalid(form, todoitem_form)
@@ -159,7 +180,7 @@ class TodoCreateView(CreateView):
             'buttons': {
                 'submit': _('btn.ok'),
                 'reset': _('btn.reset'),
-                'cancel': _('bt.cancel')
+                'cancel': _('btn.cancel')
             }
         })
         return context

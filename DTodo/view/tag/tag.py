@@ -19,7 +19,7 @@ class TagCreateView(CreateView):
             'buttons': {
                 'submit': _('btn.ok'),
                 'reset': _('btn.reset'),
-                'cancel': _('bt.cancel')
+                'cancel': _('btn.cancel')
             }
         })
         return context
