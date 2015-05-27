@@ -1,0 +1,93 @@
+{% extends 'base/base_site.html' %}
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 dtodo_tags %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "DTodo" "dtodo:index" %}
+    {% breadcrumb "Todo List" "dtodo:todoList:all" %}
+    {% breadcrumb "View" "dtodo:todoList:view" %}
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-form navbar-default">
+        <div class="container">
+            <a id="editBtn"
+               href="{% url 'dtodo:todoList:edit' pk=todoList.id %}"
+               class="navbar-btn btn btn-success actionBtn">
+                {% trans 'btn.edit' %}
+            </a>
+            <a id="deleteBtn"
+               href="{% url 'dtodo:todoList:delete' pk=todoList.id %}"
+               class="navbar-btn btn btn-danger actionBtn">
+                {% trans 'btn.delete' %}
+            </a>
+        </div>
+    </nav>
+    <div class="panel panel-{% todolist_contextual_class_visibility todoList.visibility %}">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {{ todoList.name }}
+                /
+                {{ todoList.owned_by.username }}
+            </div>
+        </div>
+        {% with todoList.todo_list.all as allTodos %}
+            {% if allTodos %}
+                <div class="panel-body">
+                <div class="container-fluid">
+                    {# add table here with all task items listed using some js to provide searching etc #}
+                    <table data-classes="table table-hover table-condensed"
+                           data-striped="true"
+                           data-show-columns="true"
+                           data-sort-name="name"
+                           data-sort-order="desc"
+                           data-toggle="table">
+                        <thead>
+                        <tr>
+                            <th data-switchable="false"
+                                data-sortable="false"
+                                class="col-xs-1">
+                                {% trans 'model.Todo.name' %}
+                            </th>
+                            <th class="col-xs-2"
+                                data-sortable="true">
+                                {% trans 'model.Todo.completed' %}
+                            </th>
+                            <th data-sortable="true"
+                                class="col-xs-1">{% trans 'model.Todo.visibility' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in allTodos %}
+                            <tr>
+                                <td data-field="title">
+                                    <a href="{% url 'dtodo:todo:view' pk=item.id %}">{{ item.name }}</a>
+                                </td>
+                                <td data-field="done">
+                                    {% if item.completed %}
+                                        <i class="fa fa-check fa-lg"
+                                           title="{% trans 'todo.completed' %}"></i>
+                                    {% else %}
+                                        <i class="fa fa-times fa-lg"
+                                           title="{% trans 'todo.not_completed' %}"></i>
+                                    {% endif %}
+                                </td>
+                                <td data-field="visibility">
+                                    {% blocktrans with v =item.visibility %}
+                                        {{ v }}
+                                    {% endblocktrans %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            {% if not allTodos %}
+                <p class="text-info">
+                    {% trans 'List has no items to be displayed' %}
+                </p>
+            {% endif %}
+        {% endwith %}
+        </div>
+{% endblock %}

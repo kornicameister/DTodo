@@ -153,15 +153,15 @@ msgid "model.Tag.word"
 msgstr "Word"
 
 #: .\DTodo\view\todo\todo.py:25
-msgid "model.todo.name"
+msgid "model.Todo.name"
 msgstr "Name"
 
 #: .\DTodo\view\todo\todo.py:29
-msgid "model.todo.completed"
+msgid "model.Todo.completed"
 msgstr "Completed"
 
 #: .\DTodo\view\todo\todo.py:34
-msgid "model.todo.progress"
+msgid "model.Todo.progress"
 msgstr "Progress"
 
 #: .\templates\admin\base_site.html:3

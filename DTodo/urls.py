@@ -3,10 +3,11 @@ from django.views.decorators.cache import never_cache
 
 from . import views
 
-
 urlpatterns = [
     url(r'^$', view=never_cache(views.index_view), name='index'),
     url(r'^todo', include('DTodo.view.todo.urls', namespace='todo')),
+    url(r'^todo-list',
+        include('DTodo.view.todoList.urls', namespace='todoList')),
     url(r'^tag', include('DTodo.view.tag.urls', namespace='tag')),
     url(r'^user', include('registration.auth_urls', namespace='user'))
 ]

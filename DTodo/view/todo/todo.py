@@ -55,9 +55,14 @@ class TodoListView(SortableListView):
 
         user = self.request.user
         if user.is_authenticated():
-            qs = Todo.objects.filter(owned_by_id=user.id)
+            if not user.is_superuser:
+                qs = Todo.objects.filter(owned_by_id=user.id)
+            else:
+                qs = Todo.objects.all()
         else:
-            qs = Todo.objects.filter(visibility=Todo.public_visibility())
+            qs = Todo.objects.filter(
+                visibility=Todo.public_visibility()
+            )
 
         qs = qs.order_by(*self.ordering)
 
@@ -138,7 +143,7 @@ class TodoCreateView(CreateView):
             forms = todoitem_form.forms
             for ti_form in forms:
                 ti_name = ti_form.cleaned_data['title']
-                if not ti_name in ti_names:
+                if ti_name not in ti_names:
                     ti_names.append(ti_name)
                 else:
                     ti_form.add_error(None, ValidationError(
@@ -190,10 +195,27 @@ class TodoEditView(UpdateView):
     model = Todo
     success_url = reverse_lazy('dtodo:todo:all')
     template_name = 'todo/todo-edit-view.html'
+    fields = (
+        'name',
+        'visibility',
+        'tags',
+        'list'
+    )
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'buttons': {
+                'submit': _('btn.ok'),
+                'reset': _('btn.reset'),
+                'cancel': _('btn.cancel')
+            }
+        })
+        return context
 
 
 class TodoDeleteView(DeleteView):
@@ -204,3 +226,15 @@ class TodoDeleteView(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            url = self.get_success_url()
+            return HttpResponseRedirect(url)
+        else:
+            return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        if 'cancel' in self.request.POST:
+            return self.success_url.format()
+        return super().success_url()

@@ -33,6 +33,11 @@
         </a>
     </li>
     <li role="presentation">
+        <a href="{% url 'dtodo:todoList:all' %}">
+            <i class="fa fa-envelope fa-lg"></i>{% trans 'models.TodoList' %}
+        </a>
+    </li>
+    <li role="presentation">
         <a href="{% url 'dtodo:tag:all' %}">
             <i class="fa fa-tags fa-lg"></i>{% trans 'models.Tag' %}
         </a>

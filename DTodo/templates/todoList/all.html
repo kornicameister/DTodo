@@ -4,7 +4,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb "DTodo" "dtodo:index" %}
-    {% breadcrumb "Todos" "dtodo:todo:all" %}
+    {% breadcrumb "Todos" "dtodo:todoList:all" %}
 {% endblock %}
 
 
@@ -16,14 +16,15 @@
     <button type="submit" class="navbar-btn btn btn-primary">
         {% trans 'btn.selectAll' %}
     </button>
-    <a href="{% url 'dtodo:todo:create' %}" class="navbar-btn btn btn-primary">
+    <a href="{% url 'dtodo:todoList:create' %}"
+       class="navbar-btn btn btn-primary">
         {% trans 'btn.add' %}
     </a>
-    <a id="editBtn" href="{% url 'dtodo:todo:edit' pk=0 %}"
+    <a id="editBtn" href="{% url 'dtodo:todoList:edit' pk=0 %}"
        class="navbar-btn btn btn-success actionBtn">
         {% trans 'btn.edit' %}
     </a>
-    <a id="deleteBtn" href="{% url 'dtodo:todo:delete' pk=0 %}"
+    <a id="deleteBtn" href="{% url 'dtodo:todoList:delete' pk=0 %}"
        class="navbar-btn btn btn-danger actionBtn">
         {% trans 'btn.delete' %}
     </a>
@@ -45,7 +46,7 @@
             <ul class="dropdown-menu" role="menu">
                 {% for value,label in filter_by %}
                     <li>
-                        <a href="{% url 'dtodo:todo:all' %}?filterBy={% trans value %}">{{ label }}</a>
+                        <a href="{% url 'dtodo:todoList:all' %}?filterBy={% trans value %}">{{ label }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -57,32 +58,10 @@
     {% if object_list %}
         {% include 'sortable_listview/sort_links.html' %}
         <ul id="allTodoLists" class="list-group">
-            {% for todo in object_list %}
-                <li data-id="{{ todo.id }}"
-                    class="list-group-item list-group-item-{% todo_contextual_class_visibility todo.visibility %}">
-                    <h4 class="list-group-item-heading">
-                        <a href="{% url 'dtodo:todo:view' pk=todo.id %}">{{ todo.name }}</a>
-                        <span class="badge">{{ todo.item_count }}</span>
-                    </h4>
-
-                    <div class="list-group-item-text">
-                        <div class="center-block">
-                            {% if todo.tags %}
-                                <ul id="tag-cloud">
-                                    {% for tag in todo.tags.all %}
-                                        <li class="tag-cloud tag-cloud-info">
-                                            {{ tag.word }}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                            {% if todo.progress %}
-                                <div class="progress">
-                                    {% progressbar value=todo.progress %}
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
+            {% for todoList in object_list %}
+                <li data-id="{{ todoList.id }}"
+                    class="list-group-item list-group-item-{% todolist_contextual_class_visibility todoList.visibility %}">
+                    <a href="{% url 'dtodo:todoList:view' pk=todoList.id %}">{{ todoList.name }}</a>
                 </li>
             {% endfor %}
         </ul>

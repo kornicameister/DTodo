@@ -1,8 +1,7 @@
 from django import template
 
 from DTodo.contants import PAGE_TITLE_DELIM
-from DTodo.models import Todo
-
+from DTodo.models import Todo, TodoList
 
 register = template.Library()
 
@@ -24,6 +23,16 @@ def todo_contextual_class_visibility(visiblity):
     if not visiblity:
         return ''
     elif visiblity == Todo.PUBLIC_VISIBILITY:
+        return 'info'
+    else:
+        return 'warning'
+
+
+@register.simple_tag
+def todolist_contextual_class_visibility(visiblity):
+    if not visiblity:
+        return ''
+    elif visiblity == TodoList.PUBLIC_VISIBILITY:
         return 'info'
     else:
         return 'warning'

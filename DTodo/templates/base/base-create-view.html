@@ -1,5 +1,5 @@
 {% extends 'base/base_site.html' %}
-{% load bootstrap3 %}
+{% load bootstrap3 i18n %}
 
 {% block content %}
     <form action="" method="post">
@@ -15,7 +15,6 @@
 
         {% block form.actions %}
             {% buttons submit=buttons.submit reset=buttons.reset %}
-                <button class="btn btn-warning">{{ buttons.cancel }}</button>
             {% endbuttons %}
         {% endblock %}
 

@@ -1,0 +1,20 @@
+{% extends 'base/base_site.html' %}
+{% load bootstrap3 i18n  cache %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+
+        {% cache 500 deleteButtons %}
+            <button type="submit"
+                    name="confirm"
+                    class="btn btn-danger"
+                    value="{% trans 'btn.delete' %}">{% trans 'btn.delete' %}</button>
+            <button type="submit"
+                    name="cancel"
+                    class="btn btn-primary"
+                    value="{% trans 'btn.cancel' %}">{% trans 'btn.cancel' %}</button>
+        {% endcache %}
+
+    </form>
+{% endblock %}

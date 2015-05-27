@@ -1,6 +1,6 @@
 from django import forms
 
-from DTodo.models import Todo, TodoItem
+from DTodo.models import Todo, TodoItem, TodoList
 
 
 class TodoForm(forms.ModelForm):
@@ -21,4 +21,13 @@ class TodoItemForm(forms.ModelForm):
             'title',
             'description',
             'importance'
+        )
+
+
+class TodoListForm(forms.ModelForm):
+    class Meta:
+        model = TodoList
+        fields = (
+            'name',
+            'visibility'
         )

@@ -7,3 +7,12 @@
     {% breadcrumb "Todos" "dtodo:todo:all" %}
     {% breadcrumb "Delete" "dtodo:todo:delete" %}
 {% endblock %}
+
+{% block content %}
+    <div class="alert alert-danger" role="alert">
+        {% blocktrans %}
+            Be aware that all associated todos will  be also deleted
+        {% endblocktrans %}
+    </div>
+    {{ block.super }}
+{% endblock %}

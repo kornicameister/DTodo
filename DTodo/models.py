@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from DTodo.common.models import AuditableModel
 
-
 '''
 
 models.OneToOneField is similar to models.ForeignKey(unique=True) but
@@ -112,12 +111,14 @@ class Todo(AuditableModel):
                              blank=True,
                              null=True,
                              unique=False)
+    # by default all list items will be deleted
     """
     Todo belong only to single list
     """
     owned_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  related_name='+',
                                  unique=False)
+    # by default all list items will be deleted
     """
     Todo is owner by some user. This is different scope then user who could
     create a list todo is in because list could be public or shared therefore

@@ -11,7 +11,6 @@ from django_tools.middlewares import ThreadLocal
 from DTodo.common.models import AuditableModel
 from DTodo.models import Todo
 
-
 logger = logging.getLogger(__name__)
 
 
