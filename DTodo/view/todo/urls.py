@@ -4,7 +4,6 @@ from django.views.decorators.cache import cache_page
 from DTodo.view.todo.todo import TodoListView, TodoDetailView, TodoCreateView, \
     TodoEditView, TodoDeleteView
 
-
 urlpatterns = [
     url(regex=r'^/all$',
         view=TodoListView.as_view(),

@@ -64,15 +64,6 @@
 
                     <div class="list-group-item-text">
                         <div class="center-block">
-                            {% if todo.tags %}
-                                <ul id="tag-cloud">
-                                    {% for tag in todo.tags.all %}
-                                        <li class="tag-cloud tag-cloud-info">
-                                            {{ tag.word }}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
                             {% if todo.progress %}
                                 <div class="progress">
                                     {% progressbar value=todo.progress %}
@@ -89,27 +80,29 @@
                 $('#allTodoLists').find('li').click(setHref);
 
                 function setHref() {
-                    var newHref = [],
-                            child,
-                            listId,
-                            deleteBtnHref;
-
-                    child = $(this);
-                    listId = child.data()['id'];
+                    var child = $(this),
+                            listId = child.data()['id'];
 
                     if (listId) {
-                        deleteBtnHref = buttons.attr('href').split('/');
-                        for (var i = 1, length = deleteBtnHref.length; i < length - 1; i++) {
-                            newHref.push(deleteBtnHref[i]);
+                        buttons.each(changeButtonState);
+                        child.unbind('click').click(unsetHref);
+                        $('#allTodoLists').find('li').not(child).unbind('click').click(setHref);
+                    }
+
+                    function changeButtonState(index, btn) {
+                        var newHref = [], href;
+
+                        btn = $(btn);
+
+                        href = btn.attr('href').split('/');
+                        for (var i = 1, length = href.length; i < length - 1; i++) {
+                            newHref.push(href[i]);
                         }
                         newHref.push(listId);
                         newHref = newHref.join('/');
 
-                        buttons.attr('href', '/' + newHref);
-                        buttons.attr('disabled', false);
-
-                        child.unbind('click').click(unsetHref);
-                        $('#allTodoLists').find('li').not(child).unbind('click').click(setHref);
+                        btn.attr('href', '/' + newHref);
+                        btn.attr('disabled', false);
                     }
                 }
 

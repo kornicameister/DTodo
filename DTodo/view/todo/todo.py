@@ -240,4 +240,4 @@ class TodoDeleteView(DeleteView):
     def get_success_url(self):
         if 'cancel' in self.request.POST:
             return self.success_url.format()
-        return super().success_url()
+        return super().get_success_url()
