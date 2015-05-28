@@ -7,19 +7,20 @@
 {% endblock %}
 
 {% block navigation_items %}
+    {{ block.super }}
     <li role="presentation">
-        <a href="/accounts/login">
+        <a href="{% url 'auth_login' %}">
             <i class="fa fa-user fa-lg"></i>{% trans 'login' %}
         </a>
     </li>
     <li role="presentation">
-        <a href="/accounts/logout">
+        <a href="{% url 'auth_logout' %}">
             <i class="fa fa-user fa-lg"></i>{% trans 'logout' %}
         </a>
     </li>
     <li role="presentation">
         {# add active class handling here, based on fiven view #}
-        <a href="{% url 'accounts:registration_register' %}">
+        <a href="{% url 'registration_register' %}">
             <i class="fa fa-user fa-lg"></i>{% trans 'registration_register' %}
         </a>
     </li>

@@ -10,12 +10,17 @@
                 <a href="#"><i class="fa fa-user fa-fw"></i>{{ username }}</a>
             </li>
             <li class="divider"></li>
-            <li><a href="{% url 'accounts:auth_logout' %}"><i
-                    class="fa fa-sign-out fa-fw"></i>{% trans 'btn.logout' %}
-            </a>
-                {% else %}
-            <li><a href="{% url 'accounts:auth_login' %}"><i
-                class="fa fa-sign-in fa-fw"></i>{% trans 'btn.login' %}</a>
+            <li>
+                <a href="{% url 'auth_logout' %}"><i
+                        class="fa fa-sign-out fa-fw"></i>{% trans 'btn.logout' %}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'auth_login' %}"><i
+                        class="fa fa-sign-in fa-fw"></i>{% trans 'btn.login' %}
+                </a>
+            </li>
         {% endif %}
     </ul>
 </li>

@@ -15,7 +15,6 @@ import os
 
 from django.utils.translation import ugettext, ugettext_lazy
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -64,7 +63,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django_tools.middlewares.ThreadLocal.ThreadLocalMiddleware'
+    'django_tools.middlewares.ThreadLocal.ThreadLocalMiddleware',
+    'DjangoTodo.middleware.LastVisitedMiddleware'
 )
 
 if DEBUG:
@@ -72,10 +72,15 @@ if DEBUG:
 
 ROOT_URLCONF = 'DjangoTodo.urls'
 
+TEMPLATE_DEBUG = DEBUG
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'DTodoRegister/templates'),
+            os.path.join(BASE_DIR, 'DTodo/templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,9 +129,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     'static/',
 )
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
 
 # administrators
 ADMINS = (
@@ -158,7 +160,10 @@ LOGIN_REDIRECT_URL = "/dtodo/"
 LOGIN_URL = "/accounts/login/"
 LOGOUT_URL = "/accounts/logout/"
 ACCOUNT_ACTIVATION_DAYS = 7
+INCLUDE_AUTH_URLS = True
+INCLUDE_REGISTER_URL = True
 REGISTRATION_OPEN = True  # put False to disable accounts registration
+REGISTRATION_AUTO_LOGIN = True
 
 # to be modified to send actual emails
 EMAIL_HOST = 'localhost'

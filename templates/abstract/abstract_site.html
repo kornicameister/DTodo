@@ -1,4 +1,4 @@
-{% load i18n django_bootstrap_breadcrumbs bootstrap3 cache %}
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 cache dtodo_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
@@ -32,19 +32,22 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
          style="margin-bottom: 0">
 
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        <span class="navbar-brand">
-            {% block header_branding %}
-            {% endblock %}
-        </span>
-        </div>
+        {% cache 1000 headerBranding %}
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">
+                    DTodo 1.0 /
+                    <span class="text-primary text-nowrap">{% pageHeader title default="DTodo" %}</span>
+                </span>
+            </div>
+        {% endcache %}
 
         <ul class="nav navbar-top-links navbar-right">
             {% block header_items %}
@@ -53,17 +56,22 @@
 
     </nav>
 
-    {% cache 10 navigation %}
-        <nav class="navbar navbar-default col-lg-2 col-md-2 col-sm-2"
-             role="navigation">
-            <div class="navbar-collapse">
-                <ul class="nav nav-pills nav-stacked">
-                    {% block navigation_items %}
-                    {% endblock %}
-                </ul>
-            </div>
-        </nav>
-    {% endcache %}
+    <nav class="navbar navbar-default col-lg-2 col-md-2 col-sm-2"
+         role="navigation">
+        <div class="navbar-collapse">
+            <ul class="nav nav-pills nav-stacked">
+                {% block navigation_items %}
+                    {% if request.session.last_visited %}
+                        <li role="presentation">
+                            <a href="{{ request.session.last_visited }}">
+                                <i class="fa fa-backward fa-lg"></i>{% trans 'btn.back' %}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endblock %}
+            </ul>
+        </div>
+    </nav>
 
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <div class="container">
@@ -79,10 +87,12 @@
             </div>
         </div>
     </div>
+    {% cache 10 footer %}
     <footer>
         {% block footer_content %}
         {% endblock %}
     </footer>
+    {% endcache %}
 </div>
 </body>
 </html>
