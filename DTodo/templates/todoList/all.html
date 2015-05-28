@@ -9,7 +9,7 @@
 
 
 {% block title %}
-    {% trans 'model.Todo.allTodos' %}
+    {% trans 'models.TodoList.all' %}
 {% endblock %}
 
 {% block action-buttons %}
@@ -61,7 +61,7 @@
             {% for todoList in object_list %}
                 <li data-id="{{ todoList.id }}"
                     class="list-group-item list-group-item-{% todolist_contextual_class_visibility todoList.visibility %}">
-                    <a href="{% url 'dtodo:todoList:view' pk=todoList.id %}">{{ todoList.name }}</a>
+                    <a href="{% url 'dtodo:todoList:view' pk=todoList.id %}">{{ todoList }}</a>
                 </li>
             {% endfor %}
         </ul>
