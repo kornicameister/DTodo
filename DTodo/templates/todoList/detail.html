@@ -47,14 +47,14 @@
                             <th data-switchable="false"
                                 data-sortable="false"
                                 class="col-xs-1">
-                                {% trans 'model.Todo.name' %}
+                                {% trans 'models.Todo.name' %}
                             </th>
                             <th class="col-xs-2"
                                 data-sortable="true">
-                                {% trans 'model.Todo.completed' %}
+                                {% trans 'models.Todo.completed' %}
                             </th>
                             <th data-sortable="true"
-                                class="col-xs-1">{% trans 'model.Todo.visibility' %}</th>
+                                class="col-xs-1">{% trans 'models.Todo.visibility' %}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -73,9 +73,13 @@
                                     {% endif %}
                                 </td>
                                 <td data-field="visibility">
-                                    {% blocktrans with v =item.visibility %}
-                                        {{ v }}
-                                    {% endblocktrans %}
+                                    {% if item.is_public %}
+                                        {% trans 'PUBLIC_VISIBILITY' %}
+                                    {% elif item.is_shared %}
+                                        {% trans 'SHARED_VISIBILITY' %}
+                                    {% else %}
+                                        {% trans 'PRIVATE_VISIBILITY' %}
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

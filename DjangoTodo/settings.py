@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'django_filters',
     'registration',
+    'rosetta',
     'DTodo',  # core application
     'DTodoRegister'  # register overrides
 )

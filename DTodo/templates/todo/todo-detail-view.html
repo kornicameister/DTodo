@@ -52,13 +52,13 @@
                     <ul class="list-group">
                         {% if todo.list %}
                             <li class="list-group-item">
-                                <span class="text-primary">{% trans 'model.Todo.list' %}</span>
+                                <span class="text-primary">{% trans 'models.Todo.list' %}</span>
                                 ::
                                 <a href="{% url 'dtodo:todoList:view' pk=todo.list.id %}">{{ todo.list.name }}</a>
                             </li>
                         {% endif %}
                         <li class="list-group-item">
-                            <span class="text-primary">{% trans 'model.Todo.owned_by' %}</span>
+                            <span class="text-primary">{% trans 'models.Todo.owned_by' %}</span>
                             ::
                             <a href="#">{{ todo.owned_by.username }}</a>
                         </li>
@@ -78,12 +78,12 @@
                                 <tr>
                                     <th data-switchable="false"
                                         data-sortable="true"
-                                        class="col-xs-1">{% trans 'model.TodoItem.title' %}</th>
-                                    <th class="col-xs-2">{% trans 'model.TodoItem.description' %}</th>
+                                        class="col-xs-1">{% trans 'models.TodoItem.title' %}</th>
+                                    <th class="col-xs-2">{% trans 'models.TodoItem.description' %}</th>
                                     <th data-sortable="true"
-                                        class="col-xs-1">{% trans 'model.TodoItem.importance' %}</th>
+                                        class="col-xs-1">{% trans 'models.TodoItem.importance' %}</th>
                                     <th data-sortable="true"
-                                        class="col-xs-1">{% trans 'model.TodoItem.done' %}</th>
+                                        class="col-xs-1">{% trans 'models.TodoItem.done' %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

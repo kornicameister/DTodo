@@ -34,8 +34,9 @@ def todolist_contextual_class_visibility(visiblity):
         return ''
     elif visiblity == TodoList.PUBLIC_VISIBILITY:
         return 'info'
-    else:
-        return 'warning'
+    elif visiblity == TodoList.SHARED_VISIBILITY:
+        return 'success'
+    return 'warning'
 
 
 @register.simple_tag

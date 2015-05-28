@@ -22,16 +22,16 @@ class TodoListView(SortableListView):
     allowed_sort_fields = {
         'name': {
             'default_direction': '',
-            'verbose_name': _('model.todo.name')
+            'verbose_name': _('models.Todo.name')
         },
         'completed': {
             'default_direction': '-',
-            'verbose_name': _('model.todo.completed')
+            'verbose_name': _('models.Todo.completed')
         },
         # custom sort field, look at get_queryset
         'progress': {
             'default_direction': '-',
-            'verbose_name': _('model.todo.progress')
+            'verbose_name': _('models.Todo.progress')
         }
     }
     default_sort_field = 'completed'
@@ -40,7 +40,6 @@ class TodoListView(SortableListView):
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
         context.update({
-            'search_query': None,
             'filter_by': Todo.VISIBILITY
         })
         return context
@@ -63,6 +62,10 @@ class TodoListView(SortableListView):
             qs = Todo.objects.filter(
                 visibility=Todo.public_visibility()
             )
+
+        if 'filterBy' in self.request.GET:
+            filter_by = self.request.GET.get('filterBy')
+            qs = qs.filter(visibility=filter_by)
 
         qs = qs.order_by(*self.ordering)
 

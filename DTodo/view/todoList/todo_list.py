@@ -91,7 +91,7 @@ class TodoListCreateView(CreateView):
     def get_success_url(self):
         if 'cancel' in self.request.POST:
             return self.success_url.format()
-        return super().success_url()
+        return super().get_success_url()
 
 
 class TodoListDetailView(DetailView):
@@ -122,8 +122,16 @@ class TodoListListView(SortableListView):
     default_sort_field = 'visibility'
     ordering = ['name', 'updated_at']
 
+    def get_context_data(self, **kwargs):
+        context = super(TodoListListView, self).get_context_data(**kwargs)
+        context.update({
+            'filter_by': TodoList.VISIBILITY
+        })
+        return context
+
     def get_queryset(self):
         user = self.request.user
+
         if user.is_authenticated():
             if not user.is_superuser:
                 qs = TodoList.objects.filter(owned_by_id=user.id)
@@ -133,6 +141,10 @@ class TodoListListView(SortableListView):
             qs = TodoList.objects.filter(
                 visibility=TodoList.public_visibility()
             )
+
+        if 'filterBy' in self.request.GET:
+            filter_by = self.request.GET.get('filterBy')
+            qs = qs.filter(visibility=filter_by)
 
         qs = qs.order_by(*self.ordering)
         return qs.order_by(self.sort)

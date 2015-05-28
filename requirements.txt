@@ -7,3 +7,4 @@ django-tools>=0.28.0
 django-registration-redux
 pytz
 django-debug-toolbar
+django-rosetta

@@ -78,6 +78,18 @@ class TodoList(AuditableModel):
     of the single user.
     """
 
+    @property
+    def is_public(self):
+        return self.visibility == self.PUBLIC_VISIBILITY
+
+    @property
+    def is_shared(self):
+        return self.visibility == self.SHARED_VISIBILITY
+
+    @property
+    def is_private(self):
+        return self.visibility == self.PRIVATE_VISIBILITY
+
     def __str__(self):
         return '%s by %s' % (self.name, str(self.owned_by))
 

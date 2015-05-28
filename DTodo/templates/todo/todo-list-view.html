@@ -13,9 +13,6 @@
 {% endblock %}
 
 {% block action-buttons %}
-    <button type="submit" class="navbar-btn btn btn-primary">
-        {% trans 'btn.selectAll' %}
-    </button>
     <a href="{% url 'dtodo:todo:create' %}" class="navbar-btn btn btn-primary">
         {% trans 'btn.add' %}
     </a>
