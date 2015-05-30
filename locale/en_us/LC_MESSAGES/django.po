@@ -1,3 +1,70 @@
+#: .\DTodoRegister\templates\registration\activate.html:4
+msgid "activate"
+msgstr "Activate"
+
+#: .\DTodoRegister\templates\registration\activate.html:15
+msgid "activate_ok"
+msgstr "Activated"
+
+#: .\DTodoRegister\templates\registration\activate.html:17
+msgid "activate_not_ok"
+msgstr "Not activated"
+
+#: .\DTodoRegister\templates\registration\activation_complete.html:4
+#: .\DTodoRegister\templates\registration\activation_complete.html:10
+msgid "activation_complete"
+msgstr "Activation completed"
+
+#: .\DTodoRegister\templates\registration\activation_complete.html:14
+msgid "activation_complete_msg"
+msgstr "Activation of your account has completed with success"
+
+#: .\DTodoRegister\templates\registration\base_registration.html:13
+msgid "login"
+msgstr "Login"
+
+#: .\DTodoRegister\templates\registration\base_registration.html:18
+#: .\DTodoRegister\templates\registration\logout.html:4
+msgid "logout"
+msgstr "Logout"
+
+#: .\DTodoRegister\templates\registration\base_registration.html:24
+msgid "registration_register"
+msgstr "Registration"
+
+#: .\DTodoRegister\templates\registration\login.html:4
+#: .\DTodoRegister\templates\registration\registration_form.html:4
+msgid "register"
+msgstr "Register"
+
+#: .\DTodoRegister\templates\registration\logout.html:10
+msgid "logout_success_mgs"
+msgstr "You've been successfully logged out"
+
+#: .\DTodoRegister\templates\registration\registration_closed.html:4
+msgid "registration_closed"
+msgstr "Registration disabled"
+
+#: .\DTodoRegister\templates\registration\registration_closed.html:10
+msgid "registration_closed_title"
+msgstr "For some reasons registration has been currently disabled"
+
+#: .\DTodoRegister\templates\registration\registration_closed.html:14
+msgid "registration_closed_msg"
+msgstr "For some reasons registration has been currently disabled"
+
+#: .\DTodoRegister\templates\registration\registration_complete.html:4
+msgid "registration_complete"
+msgstr "Registration completed"
+
+#: .\DTodoRegister\templates\registration\registration_complete.html:10
+msgid "registration_complete_title"
+msgstr "Registration completed"
+
+#: .\DTodoRegister\templates\registration\registration_complete.html:14
+msgid "registration_complete_msg"
+msgstr "Activation email has been sent to You."
+
 #: .\DTodo\admin.py:80
 msgid "Mark item as completed"
 msgstr "Mark item as completed"
@@ -32,31 +99,31 @@ msgstr "Delete"
 
 #: .\DTodo\templates\base\base-delete-view.html:16 .\DTodo\view\tag\tag.py:22
 #: .\DTodo\view\todoList\todo_list.py:30 .\DTodo\view\todoList\todo_list.py:75
-#: .\DTodo\view\todo\todo.py:191 .\DTodo\view\todo\todo.py:218
+#: .\DTodo\view\todo\todo.py:188 .\DTodo\view\todo\todo.py:216
 msgid "btn.cancel"
 msgstr "Cancel"
 
-#: .\DTodo\templates\base\base_site.html:27
+#: .\DTodo\templates\base\base_site.html:23
 msgid "Index"
 msgstr "Index"
 
-#: .\DTodo\templates\base\base_site.html:32
+#: .\DTodo\templates\base\base_site.html:28
 msgid "models.Todo"
 msgstr "Todo"
 
-#: .\DTodo\templates\base\base_site.html:37
+#: .\DTodo\templates\base\base_site.html:33
 msgid "models.TodoList"
 msgstr "List"
 
-#: .\DTodo\templates\base\base_site.html:42
+#: .\DTodo\templates\base\base_site.html:38
 msgid "models.Tag"
 msgstr "Tag"
 
-#: .\DTodo\templates\base\components\header-user.html:14
+#: .\DTodo\templates\base\components\header-user.html:15
 msgid "btn.logout"
 msgstr "Logout"
 
-#: .\DTodo\templates\base\components\header-user.html:18
+#: .\DTodo\templates\base\components\header-user.html:21
 msgid "btn.login"
 msgstr "Login"
 
@@ -67,8 +134,8 @@ msgstr "All todos"
 
 #: .\DTodo\templates\base\components\most_completed_todos.html:43
 #: .\DTodo\templates\base\components\recent_todos.html:30
-#: .\DTodo\templates\todoList\all.html:106
-#: .\DTodo\templates\todo\todo-list-view.html:124
+#: .\DTodo\templates\todoList\all.html:107
+#: .\DTodo\templates\todo\todo-list-view.html:117
 msgid "NO_TODO_TO_DISPLAY"
 msgstr "There is currently no todo to display"
 
@@ -87,7 +154,6 @@ msgid "NO_TAGS_TO_DISPLAY"
 msgstr "There is currently no tags to display"
 
 #: .\DTodo\templates\todoList\all.html:12
-#| msgid "models.TodoList"
 msgid "models.TodoList.all"
 msgstr "List"
 
@@ -202,14 +268,14 @@ msgid "model.Todo.allTodos"
 msgstr "All todos"
 
 #: .\DTodo\view\tag\tag.py:20 .\DTodo\view\todoList\todo_list.py:28
-#: .\DTodo\view\todoList\todo_list.py:73 .\DTodo\view\todo\todo.py:189
-#: .\DTodo\view\todo\todo.py:216
+#: .\DTodo\view\todoList\todo_list.py:73 .\DTodo\view\todo\todo.py:186
+#: .\DTodo\view\todo\todo.py:214
 msgid "btn.ok"
 msgstr "Ok"
 
 #: .\DTodo\view\tag\tag.py:21 .\DTodo\view\todoList\todo_list.py:29
-#: .\DTodo\view\todoList\todo_list.py:74 .\DTodo\view\todo\todo.py:190
-#: .\DTodo\view\todo\todo.py:217
+#: .\DTodo\view\todoList\todo_list.py:74 .\DTodo\view\todo\todo.py:187
+#: .\DTodo\view\todo\todo.py:215
 msgid "btn.reset"
 msgstr "Reset"
 
@@ -229,73 +295,11 @@ msgstr "List name"
 msgid "models.Todo.progress"
 msgstr "Progress"
 
+#: .\templates\abstract\abstract_site.html:67
+#| msgid "btn.back"
+msgid "btn.back"
+msgstr "Back to previous page"
+
 #: .\templates\admin\base_site.html:3
 msgid "Django site admin"
 msgstr "Django Todo"
-
-#: .\templates\registration\activate.html:4
-msgid "activate"
-msgstr "Activate"
-
-#: .\templates\registration\activate.html:15
-msgid "activate_ok"
-msgstr "Activated"
-
-#: .\templates\registration\activate.html:17
-msgid "activate_not_ok"
-msgstr "Not activated"
-
-#: .\templates\registration\activation_complete.html:4
-#: .\templates\registration\activation_complete.html:10
-msgid "activation_complete"
-msgstr "Activation completed"
-
-#: .\templates\registration\activation_complete.html:14
-msgid "activation_complete_msg"
-msgstr "Activation of your account has completed with success"
-
-#: .\templates\registration\base_registration.html:12
-msgid "login"
-msgstr "Login"
-
-#: .\templates\registration\base_registration.html:17
-#: .\templates\registration\logout.html:4
-msgid "logout"
-msgstr "Logout"
-
-#: .\templates\registration\base_registration.html:23
-msgid "registration_register"
-msgstr "Registration"
-
-#: .\templates\registration\login.html:4
-#: .\templates\registration\registration_form.html:4
-msgid "register"
-msgstr "Register"
-
-#: .\templates\registration\logout.html:10
-msgid "logout_success_mgs"
-msgstr "You've been successfully logged out"
-
-#: .\templates\registration\registration_closed.html:4
-msgid "registration_closed"
-msgstr "Registration disabled"
-
-#: .\templates\registration\registration_closed.html:10
-msgid "registration_closed_title"
-msgstr "For some reasons registration has been currently disabled"
-
-#: .\templates\registration\registration_closed.html:14
-msgid "registration_closed_msg"
-msgstr "For some reasons registration has been currently disabled"
-
-#: .\templates\registration\registration_complete.html:4
-msgid "registration_complete"
-msgstr "Registration completed"
-
-#: .\templates\registration\registration_complete.html:10
-msgid "registration_complete_title"
-msgstr "Registration completed"
-
-#: .\templates\registration\registration_complete.html:14
-msgid "registration_complete_msg"
-msgstr "Activation email has been sent to You."
