@@ -1,5 +1,5 @@
 {% extends 'base/base-create-view.html' %}
-{% load i18n django_bootstrap_breadcrumbs bootstrap3 %}
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 bootstrap_dynamic_formsets %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -18,13 +18,29 @@
             <div class="panel-heading">
                 <div class="panel-title">Tasks</div>
             </div>
-            {{ todoitem_form.management_form }}
-            {# todo missing adding dynamic formset #}
             <div class="panel-body">
-                {% bootstrap_formset_errors todoitem_form layout='horizontal' %}
-                {% bootstrap_formset todoitem_form layout='horizontal' size='sm' %}
+                {% bootstrap_dynamic_formset todoitem_form can_order=True can_delete=True layout='horizontal' %}
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(function () {
+            var isNewItem = $('#isNewItem').val();
+            if (isNewItem === 'True') {
+                $('.checkbox input[id$="done"]').parents('.form-group').remove();
+                $(document).on('click', '.add-form', function () {
+                    var self = $(this);
+                    setTimeout(function () {
+                        self.parents('.sort-item')
+                                .next()
+                                .find('.form-group .checkbox input[id$="done"]')
+                                .parents('.form-group')
+                                .remove();
+                    }, 1);
+                    return true;
+                });
+            }
+        });
+    </script>
 {% endblock %}
 

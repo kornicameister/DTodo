@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django_bootstrap_breadcrumbs',
     'sortable_listview',
     'bootstrap3',
+    'django_bootstrap_dynamic_formsets',
     'django_filters',
     'registration',
     'rosetta',

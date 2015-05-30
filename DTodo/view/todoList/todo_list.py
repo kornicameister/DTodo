@@ -139,7 +139,7 @@ class TodoListListView(SortableListView):
                 qs = TodoList.objects.all()
         else:
             qs = TodoList.objects.filter(
-                visibility=TodoList.public_visibility()
+                visibility=TodoList.PUBLIC_VISIBILITY
             )
 
         if 'filterBy' in self.request.GET:

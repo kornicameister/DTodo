@@ -18,5 +18,11 @@
             {% endbuttons %}
         {% endblock %}
 
+        <script type="text/javascript">
+            $(function () {
+                $('button[type=submit]').attr('id', 'form-submit');
+            });
+        </script>
+        <input id="isNewItem" value="{{ new_item }}" hidden>
     </form>
 {% endblock %}

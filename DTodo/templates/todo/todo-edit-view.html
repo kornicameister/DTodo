@@ -1,9 +1,26 @@
 {% extends 'base/base-create-view.html' %}
-{% load i18n django_bootstrap_breadcrumbs bootstrap3 %}
+{% load i18n django_bootstrap_breadcrumbs bootstrap3 bootstrap_dynamic_formsets %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb "DTodo" "dtodo:index" %}
     {% breadcrumb "Todos" "dtodo:todo:all" %}
     {% breadcrumb "Edit" "dtodo:todo:edit" %}
+{% endblock %}
+
+{% block form.content %}
+    {{ block.super }}
+    <div class="container-fluid" style="margin-top: 10px">
+        <div class="col-sm-6">
+            {% bootstrap_formset_errors formsets layout='inline' type='non_fields' %}
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">Tasks</div>
+            </div>
+            <div class="panel-body">
+                {% bootstrap_dynamic_formset formsets can_order=True can_delete=True layout='horizontal' %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

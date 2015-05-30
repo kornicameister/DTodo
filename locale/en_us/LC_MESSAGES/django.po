@@ -211,7 +211,7 @@ msgstr "Ok"
 #: .\DTodo\view\todoList\todo_list.py:74 .\DTodo\view\todo\todo.py:190
 #: .\DTodo\view\todo\todo.py:217
 msgid "btn.reset"
-msgstr "Select All"
+msgstr "Reset"
 
 #: .\DTodo\view\tag\tag.py:37
 msgid "model.Tag.word"
