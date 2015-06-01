@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.views.decorators.cache import cache_page
 
 from DTodo.view.todoList.todo_list import TodoListListView, TodoListDetailView, \
     TodoListCreateView, TodoListDeleteView, TodoListEditView
@@ -9,7 +8,7 @@ urlpatterns = [
         view=TodoListListView.as_view(),
         name='all'),
     url(regex=r'^/(?P<pk>\d+)(/(?P<slug>[-\w]+))?$',
-        view=cache_page(60 * 15)(TodoListDetailView.as_view()),
+        view=TodoListDetailView.as_view(),
         name='view'),
     url(regex=r'^/new',
         view=TodoListCreateView.as_view(),

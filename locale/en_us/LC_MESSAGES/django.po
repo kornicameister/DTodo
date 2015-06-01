@@ -92,14 +92,14 @@ msgstr "TodoItem should be associated with Todo"
 #: .\DTodo\templates\base\base-delete-view.html:12
 #: .\DTodo\templates\todoList\all.html:29
 #: .\DTodo\templates\todoList\detail.html:22
-#: .\DTodo\templates\todo\todo-detail-view.html:26
+#: .\DTodo\templates\todo\todo-detail-view.html:31
 #: .\DTodo\templates\todo\todo-list-view.html:25
 msgid "btn.delete"
 msgstr "Delete"
 
 #: .\DTodo\templates\base\base-delete-view.html:16 .\DTodo\view\tag\tag.py:22
 #: .\DTodo\view\todoList\todo_list.py:30 .\DTodo\view\todoList\todo_list.py:75
-#: .\DTodo\view\todo\todo.py:188 .\DTodo\view\todo\todo.py:216
+#: .\DTodo\view\todo\todo.py:188 .\DTodo\view\todo\todo.py:220
 msgid "btn.cancel"
 msgstr "Cancel"
 
@@ -163,7 +163,7 @@ msgstr "Select All"
 
 #: .\DTodo\templates\todoList\all.html:25
 #: .\DTodo\templates\todoList\detail.html:17
-#: .\DTodo\templates\todo\todo-detail-view.html:22
+#: .\DTodo\templates\todo\todo-detail-view.html:25
 #: .\DTodo\templates\todo\todo-list-view.html:21
 msgid "btn.edit"
 msgstr "Edit"
@@ -195,7 +195,7 @@ msgid "models.Todo.visibility"
 msgstr "Visibility"
 
 #: .\DTodo\templates\todoList\detail.html:69
-#: .\DTodo\templates\todo\todo-detail-view.html:36
+#: .\DTodo\templates\todo\todo-detail-view.html:42
 msgid "todo.completed"
 msgstr "Completed"
 
@@ -219,47 +219,47 @@ msgstr "Private"
 msgid "List has no items to be displayed"
 msgstr "List has no items to be displayed"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:17
+#: .\DTodo\templates\todo\todo-detail-view.html:19
 msgid "btn.todo.complete"
 msgstr "Complete"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:39
+#: .\DTodo\templates\todo\todo-detail-view.html:45
 msgid "todo.inprogres"
 msgstr "In progress"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:55
+#: .\DTodo\templates\todo\todo-detail-view.html:60
 msgid "models.Todo.list"
 msgstr "List"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:61
+#: .\DTodo\templates\todo\todo-detail-view.html:66
 msgid "models.Todo.owned_by"
 msgstr "Owner"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:81
+#: .\DTodo\templates\todo\todo-detail-view.html:86
 msgid "models.TodoItem.title"
 msgstr "Title"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:82
+#: .\DTodo\templates\todo\todo-detail-view.html:87
 msgid "models.TodoItem.description"
 msgstr "Description"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:84
+#: .\DTodo\templates\todo\todo-detail-view.html:89
 msgid "models.TodoItem.importance"
 msgstr "Importance"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:86
+#: .\DTodo\templates\todo\todo-detail-view.html:91
 msgid "models.TodoItem.done"
 msgstr "Done"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:102
+#: .\DTodo\templates\todo\todo-detail-view.html:107
 msgid "todoitem.done"
 msgstr "Done"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:105
+#: .\DTodo\templates\todo\todo-detail-view.html:110
 msgid "todoitem.notdone"
 msgstr "Not done"
 
-#: .\DTodo\templates\todo\todo-detail-view.html:115
+#: .\DTodo\templates\todo\todo-detail-view.html:120
 msgid "Todo has no items to be displayed"
 msgstr "Todo has no items to be displayed"
 
@@ -269,13 +269,13 @@ msgstr "All todos"
 
 #: .\DTodo\view\tag\tag.py:20 .\DTodo\view\todoList\todo_list.py:28
 #: .\DTodo\view\todoList\todo_list.py:73 .\DTodo\view\todo\todo.py:186
-#: .\DTodo\view\todo\todo.py:214
+#: .\DTodo\view\todo\todo.py:218
 msgid "btn.ok"
 msgstr "Ok"
 
 #: .\DTodo\view\tag\tag.py:21 .\DTodo\view\todoList\todo_list.py:29
 #: .\DTodo\view\todoList\todo_list.py:74 .\DTodo\view\todo\todo.py:187
-#: .\DTodo\view\todo\todo.py:215
+#: .\DTodo\view\todo\todo.py:219
 msgid "btn.reset"
 msgstr "Reset"
 
@@ -296,7 +296,6 @@ msgid "models.Todo.progress"
 msgstr "Progress"
 
 #: .\templates\abstract\abstract_site.html:67
-#| msgid "btn.back"
 msgid "btn.back"
 msgstr "Back to previous page"
 

@@ -11,20 +11,26 @@
 {% block content %}
     <nav class="navbar navbar-form navbar-default">
         <div class="container">
-            {% if todo.can_complete %}
-                <a href="{% url 'dtodo:todo:delete' pk=todo.id %}" role="button"
-                   class="btn btn-success">
-                    {% trans 'btn.todo.complete' %}
+            {% with can_complete=todo.can_complete %}
+                {% if can_complete %}
+                    <a href="{% url 'dtodo:todo:edit' pk=todo.id %}?complete"
+                       role="button"
+                       class="btn btn-success">
+                        {% trans 'btn.todo.complete' %}
+                    </a>
+                {% else %}
+                    <a id="editBtn"
+                       href="{% url 'dtodo:todo:edit' pk=todo.id %}"
+                       class="navbar-btn btn btn-success">
+                        {% trans 'btn.edit' %}
+                    </a>
+                {% endif %}
+                <a id="deleteBtn"
+                   href="{% url 'dtodo:todo:delete' pk=todo.id %}"
+                   class="navbar-btn btn btn-danger">
+                    {% trans 'btn.delete' %}
                 </a>
-            {% endif %}
-            <a id="editBtn" href="{% url 'dtodo:todo:edit' pk=todo.id %}"
-               class="navbar-btn btn btn-success">
-                {% trans 'btn.edit' %}
-            </a>
-            <a id="deleteBtn" href="{% url 'dtodo:todo:delete' pk=todo.id %}"
-               class="navbar-btn btn btn-danger">
-                {% trans 'btn.delete' %}
-            </a>
+            {% endwith %}
         </div>
     </nav>
     <div class="panel panel-{% todo_contextual_class_visibility todo.visibility %}">
@@ -41,7 +47,6 @@
             </div>
         </div>
         <div class="panel-body">
-            {# todo extract to inclusion tag and format the progress to DD  #}
             {% if todo.progress %}
                 <div style="margin-bottom: 15px;padding-bottom: 20px;">
                     {% progressbar value=todo.progress %}

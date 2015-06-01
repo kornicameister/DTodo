@@ -120,8 +120,8 @@ class Todo(AuditableModel):
     """
     list = models.ForeignKey(TodoList,
                              related_name='todo_list',
-                             blank=True,
-                             null=True,
+                             blank=False,
+                             null=False,
                              unique=False)
     # by default all list items will be deleted
     """

@@ -8,9 +8,8 @@ from django.views.generic import DetailView, CreateView, UpdateView, \
     DeleteView
 from sortable_listview import SortableListView
 
-from DTodo.forms.forms import TodoCreateItemFormSet, \
-    TodoEditItemFormSet
-from DTodo.models import Todo, TodoItem
+from DTodo.forms.forms import TodoItemFormSet
+from DTodo.models import Todo
 from DTodo.contants import PAGING_OPTS
 
 
@@ -109,7 +108,7 @@ class TodoCreateView(CreateView):
 
     @staticmethod
     def _get_todo_item_formset(*args):
-        return TodoCreateItemFormSet(*args)
+        return TodoItemFormSet(*args)
 
     def get(self, request, *args, **kwargs):
         """
@@ -203,6 +202,10 @@ class TodoEditView(UpdateView):
         'list'
     )
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.object = None
+
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -224,18 +227,23 @@ class TodoEditView(UpdateView):
         and its inline formsets.
         """
         self.object = self.get_object()
+
+        if 'complete' in request.GET:
+            self.object.completed = True
+            self.object.save()
+            return HttpResponseRedirect(self.success_url)
+
         form_class = self.get_form_class()
         form = self.get_form(form_class)
+        form_set = TodoItemFormSet(instance=self.object,
+                                   save_as_new=False)
 
-        values = TodoItem.objects.filter(todo=self.object).order_by(
-            'done').values()
+        form_set.extra = 0
+
         return self.render_to_response(
             self.get_context_data(
                 form=form,
-                formsets=TodoEditItemFormSet(
-                    instance=self.object,
-                    save_as_new=False
-                )
+                formsets=form_set
             )
         )
 
@@ -248,7 +256,7 @@ class TodoEditView(UpdateView):
         self.object = self.get_object()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        formsets = TodoEditItemFormSet(self.request.POST, instance=self.object)
+        formsets = TodoItemFormSet(self.request.POST, instance=self.object)
 
         is_valid = form.is_valid() and formsets.is_valid()
 
