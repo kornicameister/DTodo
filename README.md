@@ -24,7 +24,7 @@ This will install all libraries defined in file **requirements.txt**
 ### Database
 
 Next execute following commands to apply all changes that have been applied
-on the database
+on the database.
 
 ```
 python manage.py migrate
